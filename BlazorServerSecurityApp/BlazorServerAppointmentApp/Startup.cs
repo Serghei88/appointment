@@ -1,16 +1,18 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
-using BlazorServerAppointmentApp.Areas.Identity;
 using BlazorServerAppointmentApp.Data;
-using BlazorServerAppointmentApp.Model;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -32,21 +34,57 @@ namespace BlazorServerAppointmentApp
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(
-                    Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddRoles<IdentityRole>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddSingleton<WeatherForecastService>();
+            
+            if (services.All(x => x.ServiceType != typeof(HttpClient)))
+            {
+                // Setup HttpClient for server side in a client side compatible fashion
+                services.AddScoped(s =>
+                {
+                    // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
+                    var uriHelper = s.GetRequiredService<NavigationManager>();
+                    var handler = new HttpClientHandler();
+                    handler.ServerCertificateCustomValidationCallback += (message, xcert, chain, errors) => true;
+
+                    return new HttpClient(handler)
+                    {
+                        BaseAddress = new Uri(uriHelper.BaseUri)
+                    };
+                });
+            }
+            services.AddAuthentication(options =>
+                {
+                    options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+                })
+                .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddOpenIdConnect(OpenIdConnectDefaults.AuthenticationScheme,
+                    options =>
+                    {
+                        options.Authority = "https://localhost:5005";
+                        options.ClientId = "appointment.web";
+                        options.ClientSecret = "108B7B4F-BEFC-4DD2-82E1-7F025F0F75D0";
+                        options.ResponseType = "code";
+                        options.Scope.Add("openid");
+                        options.Scope.Add("profile");
+                        options.Scope.Add("email");
+                        options.Scope.Add("appointment.api");
+                        options.Scope.Add("country");
+                        options.SaveTokens = true;
+                        options.GetClaimsFromUserInfoEndpoint = true;
+                        options.RequireHttpsMetadata = true;
+                        options.UsePkce = true;
+                    });
+            
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, UserManager<ApplicationUser> userManager, 
-            RoleManager<IdentityRole> roleManager, ApplicationDbContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -67,8 +105,6 @@ namespace BlazorServerAppointmentApp
 
             app.UseAuthentication();
             app.UseAuthorization();
-            
-            DatabaseInitializer.SeedData(userManager, roleManager, dbContext);
             
             app.UseEndpoints(endpoints =>
             {

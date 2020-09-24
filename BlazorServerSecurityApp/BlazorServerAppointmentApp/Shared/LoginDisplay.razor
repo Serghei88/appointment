@@ -1,12 +1,16 @@
-﻿<AuthorizeView>
+﻿@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+
+<AuthorizeView>
     <Authorized>
-        <a href="Identity/Account/Manage">Hello, @context.User.Identity.Name!</a>
-        <form method="post" action="Identity/Account/LogOut">
-            <button type="submit" class="nav-link btn btn-link">Log out</button>
-        </form>
+        <a href="Identity/Account/Manage">Hello, @context.User.Claims.FirstOrDefault(c => c.Type == "name")?.Value!</a>
+            <a  href="LogoutIDP">Logout</a>
     </Authorized>
     <NotAuthorized>
-        <a href="Identity/Account/Register">Register</a>
-        <a href="Identity/Account/Login">Log in</a>
+        <NotAuthorized>
+                <a href="" Match="NavLinkMatch.All">Home</a>
+                <a href="LoginIDP">Login</a>
+                <a  href="http://localhost:5005/identity/account/register">Register</a>
+        </NotAuthorized>
     </NotAuthorized>
 </AuthorizeView>

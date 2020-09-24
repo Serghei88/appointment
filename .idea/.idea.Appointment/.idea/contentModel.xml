@@ -6,47 +6,236 @@
     <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
     <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
-      <e p="Appointment.sln" t="IncludeFlat" />
-      <e p="BlazorServerSecurityApp/BlazorServerAppointmentApp" t="IncludeRecursive">
-        <e p="App.razor" t="Include" />
-        <e p="Areas" t="Include">
-          <e p="Identity" t="Include">
-            <e p="Pages" t="Include">
-              <e p="Account" t="Include">
-                <e p="LogOut.cshtml" t="Include" />
-              </e>
-              <e p="Shared" t="Include">
-                <e p="_LoginPartial.cshtml" t="Include" />
-              </e>
-            </e>
-            <e p="RevalidatingIdentityAuthenticationStateProvider.cs" t="Include" />
-          </e>
-        </e>
-        <e p="BlazorServerAppointmentApp.csproj" t="IncludeRecursive" />
+      <e p="Appointment.API" t="IncludeRecursive">
+        <e p="Appointment.API.csproj" t="IncludeRecursive" />
+        <e p="Controllers" t="Include" />
         <e p="Data" t="Include">
           <e p="ApplicationDbContext.cs" t="Include" />
           <e p="DatabaseInitializer.cs" t="Include" />
-          <e p="Migrations" t="Include">
-            <e p="00000000000000_CreateIdentitySchema.Designer.cs" t="Include" />
-            <e p="00000000000000_CreateIdentitySchema.cs" t="Include" />
-            <e p="20200923215810_customize_identity_user.Designer.cs" t="Include" />
-            <e p="20200923215810_customize_identity_user.cs" t="Include" />
-            <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="Migrations" t="Include">
+          <e p="20200924211428_InitialCreate.Designer.cs" t="Include" />
+          <e p="20200924211428_InitialCreate.cs" t="Include" />
+          <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Startup.cs" t="Include" />
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Appointment.API.AssemblyInfo.cs" t="Include" />
+            </e>
           </e>
+        </e>
+      </e>
+      <e p="Appointment.IDP" t="IncludeRecursive">
+        <e p="Appointment.IDP.csproj" t="IncludeRecursive" />
+        <e p="Areas" t="Include">
+          <e p="Identity" t="Include">
+            <e p="Data" t="Include">
+              <e p="UserDbContext.cs" t="Include" />
+            </e>
+            <e p="IdentityHostingStartup.cs" t="Include" />
+            <e p="Pages" t="Include">
+              <e p="Account" t="Include">
+                <e p="ConfirmEmail.cshtml" t="Include" />
+                <e p="ConfirmEmail.cshtml.cs" t="Include" />
+                <e p="Register.cshtml" t="Include" />
+                <e p="Register.cshtml.cs" t="Include" />
+                <e p="RegisterConfirmation.cshtml" t="Include" />
+                <e p="RegisterConfirmation.cshtml.cs" t="Include" />
+                <e p="_StatusMessage.cshtml" t="Include" />
+                <e p="_ViewImports.cshtml" t="Include" />
+              </e>
+              <e p="_ValidationScriptsPartial.cshtml" t="Include" />
+              <e p="_ViewImports.cshtml" t="Include" />
+              <e p="_ViewStart.cshtml" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="Config.cs" t="Include" />
+        <e p="DatabaseInitializer.cs" t="Include" />
+        <e p="DummyEmailSender.cs" t="Include" />
+        <e p="Migrations" t="Include">
+          <e p="20200131230119_Initial.Designer.cs" t="Include" />
+          <e p="20200131230119_Initial.cs" t="Include" />
+          <e p="20200924214618_add_user_filds.Designer.cs" t="Include" />
+          <e p="20200924214618_add_user_filds.cs" t="Include" />
+          <e p="UserDbContextModelSnapshot.cs" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Quickstart" t="Include">
+          <e p="Account" t="Include">
+            <e p="AccountController.cs" t="Include" />
+            <e p="AccountOptions.cs" t="Include" />
+            <e p="ExternalController.cs" t="Include" />
+            <e p="ExternalProvider.cs" t="Include" />
+            <e p="LoggedOutViewModel.cs" t="Include" />
+            <e p="LoginInputModel.cs" t="Include" />
+            <e p="LoginViewModel.cs" t="Include" />
+            <e p="LogoutInputModel.cs" t="Include" />
+            <e p="LogoutViewModel.cs" t="Include" />
+            <e p="RedirectViewModel.cs" t="Include" />
+          </e>
+          <e p="Consent" t="Include">
+            <e p="ConsentController.cs" t="Include" />
+            <e p="ConsentInputModel.cs" t="Include" />
+            <e p="ConsentOptions.cs" t="Include" />
+            <e p="ConsentViewModel.cs" t="Include" />
+            <e p="ProcessConsentResult.cs" t="Include" />
+            <e p="ScopeViewModel.cs" t="Include" />
+          </e>
+          <e p="Device" t="Include">
+            <e p="DeviceAuthorizationInputModel.cs" t="Include" />
+            <e p="DeviceAuthorizationViewModel.cs" t="Include" />
+            <e p="DeviceController.cs" t="Include" />
+          </e>
+          <e p="Diagnostics" t="Include">
+            <e p="DiagnosticsController.cs" t="Include" />
+            <e p="DiagnosticsViewModel.cs" t="Include" />
+          </e>
+          <e p="Extensions.cs" t="Include" />
+          <e p="Grants" t="Include">
+            <e p="GrantsController.cs" t="Include" />
+            <e p="GrantsViewModel.cs" t="Include" />
+          </e>
+          <e p="Home" t="Include">
+            <e p="ErrorViewModel.cs" t="Include" />
+            <e p="HomeController.cs" t="Include" />
+          </e>
+          <e p="SecurityHeadersAttribute.cs" t="Include" />
+          <e p="TestUsers.cs" t="Include" />
+        </e>
+        <e p="ScaffoldingReadMe.txt" t="Include" />
+        <e p="Startup.cs" t="Include" />
+        <e p="Views" t="Include">
+          <e p="Account" t="Include">
+            <e p="AccessDenied.cshtml" t="Include" />
+            <e p="LoggedOut.cshtml" t="Include" />
+            <e p="Login.cshtml" t="Include" />
+            <e p="Logout.cshtml" t="Include" />
+          </e>
+          <e p="Consent" t="Include">
+            <e p="Index.cshtml" t="Include" />
+          </e>
+          <e p="Device" t="Include">
+            <e p="Success.cshtml" t="Include" />
+            <e p="UserCodeCapture.cshtml" t="Include" />
+            <e p="UserCodeConfirmation.cshtml" t="Include" />
+          </e>
+          <e p="Diagnostics" t="Include">
+            <e p="Index.cshtml" t="Include" />
+          </e>
+          <e p="Grants" t="Include">
+            <e p="Index.cshtml" t="Include" />
+          </e>
+          <e p="Home" t="Include">
+            <e p="Index.cshtml" t="Include" />
+          </e>
+          <e p="Shared" t="Include">
+            <e p="Error.cshtml" t="Include" />
+            <e p="Redirect.cshtml" t="Include" />
+            <e p="_Layout.cshtml" t="Include" />
+            <e p="_ScopeListItem.cshtml" t="Include" />
+            <e p="_ValidationSummary.cshtml" t="Include" />
+          </e>
+          <e p="_ViewImports.cshtml" t="Include" />
+          <e p="_ViewStart.cshtml" t="Include" />
+        </e>
+        <e p="appsettings.Development.json" t="Include" />
+        <e p="appsettings.json" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="localhost.pfx" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Appointment.IDP.AssemblyInfo.cs" t="Include" />
+              <e p="Appointment.IDP.RazorAssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="readme.md" t="Include" />
+        <e p="wwwroot" t="Include">
+          <e p="css" t="Include">
+            <e p="site.css" t="Include" />
+            <e p="site.less" t="Include" />
+            <e p="site.min.css" t="Include" />
+          </e>
+          <e p="favicon.ico" t="Include" />
+          <e p="icon.jpg" t="Include" />
+          <e p="icon.png" t="Include" />
+          <e p="js" t="Include">
+            <e p="signin-redirect.js" t="Include" />
+            <e p="signout-redirect.js" t="Include" />
+          </e>
+          <e p="lib" t="Include">
+            <e p="bootstrap" t="Include">
+              <e p="css" t="Include">
+                <e p="bootstrap.css" t="Include" />
+                <e p="bootstrap.css.map" t="Include" />
+                <e p="bootstrap.min.css" t="Include" />
+              </e>
+              <e p="fonts" t="Include">
+                <e p="glyphicons-halflings-regular.eot" t="Include" />
+                <e p="glyphicons-halflings-regular.svg" t="Include" />
+                <e p="glyphicons-halflings-regular.ttf" t="Include" />
+                <e p="glyphicons-halflings-regular.woff" t="Include" />
+                <e p="glyphicons-halflings-regular.woff2" t="Include" />
+              </e>
+              <e p="js" t="Include">
+                <e p="bootstrap.js" t="Include" />
+                <e p="bootstrap.min.js" t="Include" />
+              </e>
+            </e>
+            <e p="jquery" t="Include">
+              <e p="jquery.js" t="Include" />
+              <e p="jquery.min.js" t="Include" />
+              <e p="jquery.min.map" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Appointment.Shared" t="IncludeRecursive">
+        <e p="ApplicationUser.cs" t="Include" />
+        <e p="Appointment.Shared.csproj" t="IncludeRecursive" />
+        <e p="Appointment.cs" t="Include" />
+        <e p="Doctor.cs" t="Include" />
+        <e p="MedicalProcedure.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Appointment.Shared.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Appointment.sln" t="IncludeFlat" />
+      <e p="BlazorServerSecurityApp/BlazorServerAppointmentApp" t="IncludeRecursive">
+        <e p="App.razor" t="Include" />
+        <e p="BlazorServerAppointmentApp.csproj" t="IncludeRecursive" />
+        <e p="Data" t="Include">
           <e p="WeatherForecast.cs" t="Include" />
           <e p="WeatherForecastService.cs" t="Include" />
-        </e>
-        <e p="Model" t="Include">
-          <e p="ApplicationUser.cs" t="Include" />
-          <e p="Appointment.cs" t="Include" />
-          <e p="Doctor.cs" t="Include" />
-          <e p="MedicalProcedure.cs" t="Include" />
         </e>
         <e p="Pages" t="Include">
           <e p="Counter.razor" t="Include" />
           <e p="Error.razor" t="Include" />
           <e p="FetchData.razor" t="Include" />
           <e p="Index.razor" t="Include" />
+          <e p="LoginIDP.cshtml" t="Include" />
+          <e p="LoginIDP.cshtml.cs" t="Include" />
+          <e p="LogoutIDP.cshtml" t="Include" />
+          <e p="LogoutIDP.cshtml.cs" t="Include" />
           <e p="_Host.cshtml" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
