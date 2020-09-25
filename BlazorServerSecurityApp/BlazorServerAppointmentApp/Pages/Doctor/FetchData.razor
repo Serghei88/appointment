@@ -1,0 +1,30 @@
+@attribute [Authorize(Roles = "Administrator")]
+@page "/doctors"
+@using BlazorServerAppointmentApp.Model
+<h3>Doctors</h3>
+
+<RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="4"
+                AllowSorting="true" Data="@doctors" TItem="DoctorViewModel" ColumnWidth="200px">
+        <Columns>
+            <RadzenGridColumn TItem="DoctorViewModel" Property="Id" Title="Doctor ID" />
+            <RadzenGridColumn TItem="DoctorViewModel" Property="LastName" Title="Last Name" />
+            <RadzenGridColumn TItem="DoctorViewModel" Property="FirstName" Title="First Name" />
+        </Columns>
+    </RadzenGrid>
+
+
+@code {
+    
+    List<DoctorViewModel> doctors { get; set; } = new List<DoctorViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        doctors = await StateProvider.GetDoctors();
+    }
+    
+    [CascadingParameter]
+    StateProvider StateProvider { get; set; }
+
+    protected override void OnInitialized() => StateProvider.OnChange += StateHasChanged;
+    public void Dispose() => StateProvider.OnChange -= StateHasChanged;
+}

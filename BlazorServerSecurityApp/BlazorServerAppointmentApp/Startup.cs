@@ -1,7 +1,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Appointment.Shared.Model;
+using AutoMapper;
 using BlazorServerAppointmentApp.Areas.Identity;
 using BlazorServerAppointmentApp.Data;
 using BlazorServerAppointmentApp.Model;
@@ -16,6 +19,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Radzen;
 
 namespace BlazorServerAppointmentApp
 {
@@ -42,6 +46,34 @@ namespace BlazorServerAppointmentApp
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddSingleton<WeatherForecastService>();
+            services.AddScoped(s => new AppSettingsModel(Configuration.GetSection("AppSettings")));
+            
+            // Server Side Blazor doesn't register HttpClient by default
+            if (services.All(x => x.ServiceType != typeof(HttpClient)))
+            {
+                // Setup HttpClient for server side in a client side compatible fashion
+                services.AddScoped(s =>
+                {
+                    // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
+                    var uriHelper = s.GetRequiredService<NavigationManager>();
+                    var handler = new HttpClientHandler();
+
+                    return new HttpClient(handler)
+                    {
+                        BaseAddress = new Uri(uriHelper.BaseUri)
+                    };
+                });
+            }
+
+            //Radzen setup
+            services.AddScoped<DialogService>();
+            services.AddScoped<NotificationService>();
+            services.AddScoped<TooltipService>();
+            services.AddScoped<ContextMenuService>();
+            
+            //Automapper
+            services.AddAutoMapper(typeof(Startup));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,7 +100,7 @@ namespace BlazorServerAppointmentApp
             app.UseAuthentication();
             app.UseAuthorization();
             
-            DatabaseInitializer.SeedData(userManager, roleManager, dbContext);
+            DatabaseInitializer.SeedData(userManager, roleManager);
             
             app.UseEndpoints(endpoints =>
             {

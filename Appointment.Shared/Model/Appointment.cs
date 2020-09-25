@@ -1,6 +1,6 @@
 using System;
 
-namespace BlazorServerAppointmentApp.Model
+namespace Appointment.Shared.Model
 {
     public class Appointment
     {

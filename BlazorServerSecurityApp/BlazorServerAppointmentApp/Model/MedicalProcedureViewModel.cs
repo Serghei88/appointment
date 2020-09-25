@@ -1,6 +1,6 @@
 namespace BlazorServerAppointmentApp.Model
 {
-    public class MedicalProcedure
+    public class MedicalProcedureViewModel
     {
         public long Id { get; set; }
         public string Name { get; set; }

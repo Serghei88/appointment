@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 
-namespace BlazorServerAppointmentApp.Model
+namespace Appointment.Shared.DTO
 {
-    public class Doctor
+    public class DoctorDTO
     {
         public long Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public IList<MedicalProcedure> MedicalProcedures { get; set; }
+        public IList<MedicalProcedureDTO> MedicalProcedures { get; set; }
     }
 }
