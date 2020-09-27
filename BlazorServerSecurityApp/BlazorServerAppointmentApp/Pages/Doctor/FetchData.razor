@@ -1,19 +1,52 @@
 @attribute [Authorize(Roles = "Administrator")]
 @page "/doctors"
 @using BlazorServerAppointmentApp.Model
+@inject NavigationManager UriHelper
+@inject DialogService dialogService
+
 <h3>Doctors</h3>
 
+<RadzenButton Text=@($"Add new Doctor") ButtonStyle="ButtonStyle.Primary" 
+              Click="@(x=> UriHelper.NavigateTo($"doctors/add"))" />
+
 <RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="4"
-                AllowSorting="true" Data="@doctors" TItem="DoctorViewModel" ColumnWidth="200px">
+                AllowSorting="true" Data="@doctors" TItem="DoctorViewModel" ColumnWidth="200px" >
         <Columns>
             <RadzenGridColumn TItem="DoctorViewModel" Property="Id" Title="Doctor ID" />
             <RadzenGridColumn TItem="DoctorViewModel" Property="LastName" Title="Last Name" />
             <RadzenGridColumn TItem="DoctorViewModel" Property="FirstName" Title="First Name" />
+            <RadzenGridColumn TItem="DoctorViewModel" Property="Edit" Title="Edit" Sortable="false" Filterable="false">
+                <Template Context="data">
+                    <RadzenButton Text=@($"Edit") ButtonStyle="ButtonStyle.Secondary" 
+                                  Click="@(x=> UriHelper.NavigateTo($"doctors/edit/{data.Id}"))" />
+                    <RadzenButton Text=@($"Delete") ButtonStyle="ButtonStyle.Danger" 
+                                                      Click="@(x=> ShowDeleteDoctorDialog(data))" />
+                </Template>
+            </RadzenGridColumn>
         </Columns>
     </RadzenGrid>
 
 
 @code {
+    private async Task DeleteDoctor(long doctorId)
+    {
+        await StateProvider.DeleteDoctor(doctorId);
+        doctors = await StateProvider.GetDoctors();
+        StateHasChanged();
+        dialogService.Close();
+    }
+    
+    async Task ShowDeleteDoctorDialog(DoctorViewModel doctor) => await dialogService.OpenAsync("Delete Doctor", ds =>
+        @<RadzenCard Style="padding: 20px;">
+            <p Style="margin-bottom: 10px;">Confirm deleting @doctor.FirstName @doctor.LastName?</p>
+            <div class="row">
+                <div class="col-md-12">
+                    <RadzenButton Text="Ok" Click="()=> DeleteDoctor(doctor.Id)" Style="margin-bottom: 10px; width: 150px" />
+                    <RadzenButton Text="Cancel" Click="()=> ds.Close(false)" ButtonStyle="ButtonStyle.Secondary"  Style="margin-bottom: 10px; width: 150px"/>
+                </div>
+            </div>
+        </RadzenCard>);
+
     
     List<DoctorViewModel> doctors { get; set; } = new List<DoctorViewModel>();
 
@@ -21,7 +54,7 @@
     {
         doctors = await StateProvider.GetDoctors();
     }
-    
+
     [CascadingParameter]
     StateProvider StateProvider { get; set; }
 

@@ -22,11 +22,61 @@
         Uri uri = new Uri($"{Settings.WebApiUrl}/doctors");
         return Mapper.Map<List<DoctorViewModel>>(await HttpClient.GetFromJsonAsync<DoctorDTO[]>(uri));
     }
-    
+    public async Task<DoctorViewModel> GetDoctor(long Id)
+    {
+        Uri uri = new Uri($"{Settings.WebApiUrl}/doctors/{Id}");
+        return Mapper.Map<DoctorViewModel>(await HttpClient.GetFromJsonAsync<DoctorDTO>(uri));
+    }
+
+    public async Task CreateOrUpdateDoctor(DoctorViewModel doctor)
+    {
+        var dto = Mapper.Map<DoctorDTO>(doctor);
+        Uri uri = new Uri($"{Settings.WebApiUrl}/doctors");
+        if (doctor.Id == 0)
+        {
+            await HttpClient.PostAsJsonAsync(uri, dto);
+        }
+        else
+        {
+            await HttpClient.PutAsJsonAsync(uri, dto);
+        }
+    }
+    public async Task DeleteDoctor(long doctorId)
+    {
+        Uri uri = new Uri($"{Settings.WebApiUrl}/doctors/{doctorId}");
+        await HttpClient.DeleteAsync(uri);
+    }
+
     public async Task<List<MedicalProcedureViewModel>> GetMedicalProcedures()
     {
         Uri uri = new Uri($"{Settings.WebApiUrl}/medicalprocedures");
         return Mapper.Map<List<MedicalProcedureViewModel>>(await HttpClient.GetFromJsonAsync<MedicalProcedureDTO[]>(uri));
+    }
+    
+    public async Task<MedicalProcedureViewModel> GetMedicalProcedure(long Id)
+    {
+        Uri uri = new Uri($"{Settings.WebApiUrl}/medicalprocedures/{Id}");
+        return Mapper.Map<MedicalProcedureViewModel>(await HttpClient.GetFromJsonAsync<MedicalProcedureDTO>(uri));
+    }
+
+    public async Task CreateOrUpdateMedicalProcedure(MedicalProcedureViewModel medicalProcedureViewModel)
+    {
+        var dto = Mapper.Map<MedicalProcedureDTO>(medicalProcedureViewModel);
+        Uri uri = new Uri($"{Settings.WebApiUrl}/medicalprocedures");
+        if (medicalProcedureViewModel.Id == 0)
+        {
+            await HttpClient.PostAsJsonAsync(uri, dto);
+        }
+        else
+        {
+            await HttpClient.PutAsJsonAsync(uri, dto);
+        }
+    }
+    
+    public async Task DeleteMedicalProcedure(long medicalProcedureId)
+    {
+        Uri uri = new Uri($"{Settings.WebApiUrl}/medicalprocedures/{medicalProcedureId}");
+        await HttpClient.DeleteAsync(uri);
     }
     
     public async Task<List<AppointmentViewModel>> GetAppointments()

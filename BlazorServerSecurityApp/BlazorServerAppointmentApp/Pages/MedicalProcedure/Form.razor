@@ -1,0 +1,32 @@
+@using BlazorServerAppointmentApp.Model
+<EditForm Model="@MedicalProcedure" OnValidSubmit="@OnValidSubmit">
+    <DataAnnotationsValidator />
+    <div class="form-group">
+        <label>Name :</label>
+        <div>
+            <InputText @bind-Value="@MedicalProcedure.Name" />
+            <ValidationMessage For="@(() => MedicalProcedure.Name)" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div>
+            <label>Description :</label>
+            <div>
+                <RadzenTextArea @bind-Value="@MedicalProcedure.Description"  />
+                <ValidationMessage For="@(() => MedicalProcedure.Description)"/>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success">
+        @ButtonText
+    </button>
+
+</EditForm>
+
+
+@code {
+    [Parameter] public MedicalProcedureViewModel MedicalProcedure { get; set; }
+    [Parameter] public string ButtonText { get; set; } = "Save";
+    [Parameter] public EventCallback OnValidSubmit { get; set; }
+}

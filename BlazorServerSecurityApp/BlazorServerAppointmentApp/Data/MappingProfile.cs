@@ -13,6 +13,7 @@ namespace BlazorServerAppointmentApp.Data
             CreateMap<DoctorDTO, DoctorViewModel>().ReverseMap();
             CreateMap<MedicalProcedureDTO, MedicalProcedureViewModel>().ReverseMap();
             CreateMap<AppointmentDTO, AppointmentViewModel>().ReverseMap();
+            CreateMap<DoctorMedicalProcedureDTO, DoctorMedicalProcedureViewModel>().ReverseMap();
         }
     }
 }

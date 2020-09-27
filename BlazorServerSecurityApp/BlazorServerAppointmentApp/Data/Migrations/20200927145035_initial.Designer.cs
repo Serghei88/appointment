@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlazorServerAppointmentApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200923215810_customize_identity_user")]
-    partial class customize_identity_user
+    [Migration("20200927145035_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,72 +20,6 @@ namespace BlazorServerAppointmentApp.Data.Migrations
                 .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("BlazorServerAppointmentApp.Model.Appointment", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<long?>("MedicalProcedureId")
-                        .HasColumnType("bigint");
-
-                    b.Property<DateTime>("Time")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("MedicalProcedureId");
-
-                    b.ToTable("Appointments");
-                });
-
-            modelBuilder.Entity("BlazorServerAppointmentApp.Model.Doctor", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("FirstName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Doctors");
-                });
-
-            modelBuilder.Entity("BlazorServerAppointmentApp.Model.MedicalProcedure", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("DoctorId")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DoctorId");
-
-                    b.ToTable("MedicalProcedures");
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -293,7 +227,7 @@ namespace BlazorServerAppointmentApp.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("BlazorServerAppointmentApp.Model.ApplicationUser", b =>
+            modelBuilder.Entity("Appointment.Shared.Model.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -304,24 +238,6 @@ namespace BlazorServerAppointmentApp.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasDiscriminator().HasValue("ApplicationUser");
-                });
-
-            modelBuilder.Entity("BlazorServerAppointmentApp.Model.Appointment", b =>
-                {
-                    b.HasOne("BlazorServerAppointmentApp.Model.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("BlazorServerAppointmentApp.Model.MedicalProcedure", "MedicalProcedure")
-                        .WithMany()
-                        .HasForeignKey("MedicalProcedureId");
-                });
-
-            modelBuilder.Entity("BlazorServerAppointmentApp.Model.MedicalProcedure", b =>
-                {
-                    b.HasOne("BlazorServerAppointmentApp.Model.Doctor", null)
-                        .WithMany("MedicalProcedures")
-                        .HasForeignKey("DoctorId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

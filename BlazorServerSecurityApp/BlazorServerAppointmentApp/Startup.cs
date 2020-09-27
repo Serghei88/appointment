@@ -7,6 +7,7 @@ using Appointment.Shared.Model;
 using AutoMapper;
 using BlazorServerAppointmentApp.Areas.Identity;
 using BlazorServerAppointmentApp.Data;
+using BlazorServerAppointmentApp.Data.Interfaces;
 using BlazorServerAppointmentApp.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
@@ -47,6 +48,7 @@ namespace BlazorServerAppointmentApp
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped(s => new AppSettingsModel(Configuration.GetSection("AppSettings")));
+            services.AddScoped<IPasswordGenerator, RandomPasswordGenerator>();
             
             // Server Side Blazor doesn't register HttpClient by default
             if (services.All(x => x.ServiceType != typeof(HttpClient)))

@@ -31,55 +31,47 @@ namespace BlazorServerAppointmentApp.Data
             var procedure5 = new MedicalProcedure()
                 {Name = "Medical Procedure 5", Description = "Description of the procedure 5"};
             dbContext.MedicalProcedures.AddRange(procedure1, procedure2, procedure3, procedure4, procedure5);
-
             dbContext.SaveChanges();
 
-            dbContext.Doctors.AddRange(
-                new Doctor
-                {
-                    FirstName = "John", LastName = "Smith",
-                    MedicalProcedures = new List<MedicalProcedure>()
-                    {
-                        dbContext.MedicalProcedures.FirstOrDefault(x => x.Name == "Medical Procedure 1")
-                    }
-                },
-                new Doctor
-                {
-                    FirstName = "Adam", LastName = "Sandler",
-                    MedicalProcedures = new List<MedicalProcedure>()
-                    {
-                        dbContext.MedicalProcedures.FirstOrDefault(x => x.Name == "Medical Procedure 2")
-                    }
-                },
-                new Doctor
-                {
-                    FirstName = "Brad", LastName = "Pitt",
-                    MedicalProcedures = new List<MedicalProcedure>()
-                    {
-                        dbContext.MedicalProcedures.FirstOrDefault(x => x.Name == "Medical Procedure 1"),
-                        dbContext.MedicalProcedures.FirstOrDefault(x => x.Name == "Medical Procedure 2"),
-                        dbContext.MedicalProcedures.FirstOrDefault(x => x.Name == "Medical Procedure 3"),
-                    }
-                },
-                new Doctor
-                {
-                    FirstName = "Abraham", LastName = "Lincoln",
-                    MedicalProcedures = new List<MedicalProcedure>()
-                    {
-                        dbContext.MedicalProcedures.FirstOrDefault(x => x.Name == "Medical Procedure 4")
-                    }
-                },
-                new Doctor
-                {
-                    FirstName = "Angelina", LastName = "Jolie",
-                    MedicalProcedures = new List<MedicalProcedure>()
-                    {
-                        dbContext.MedicalProcedures.FirstOrDefault(x => x.Name == "Medical Procedure 5")
-                    }
-                }
-            );
+            var doctor1 = new Doctor {FirstName = "John", LastName = "Smith"};
+            var doctor2 = new Doctor {FirstName = "Adam", LastName = "Sandler"};
+            var doctor3 = new Doctor {FirstName = "Brad", LastName = "Pitt",};
+            var doctor4 = new Doctor {FirstName = "Abraham", LastName = "Lincoln",};
+            var doctor5 = new Doctor {FirstName = "Angelina", LastName = "Jolie",};
+            
+            dbContext.Doctors.AddRange(doctor1, doctor2, doctor3, doctor4, doctor5);
             dbContext.SaveChanges();
+            
+            doctor1.DoctorMedicalProcedures.Add( new DoctorMedicalProcedure()
+            {
+                DoctorId = doctor1.Id, MedicalProcedureId = procedure1.Id
+            });
+            doctor2.DoctorMedicalProcedures.Add( new DoctorMedicalProcedure()
+            {
+                DoctorId = doctor2.Id, MedicalProcedureId = procedure2.Id
+            });
+            doctor3.DoctorMedicalProcedures.Add( new DoctorMedicalProcedure()
+            {
+                DoctorId = doctor3.Id, MedicalProcedureId = procedure3.Id
+            });
+            doctor4.DoctorMedicalProcedures.Add( new DoctorMedicalProcedure()
+            {
+                DoctorId = doctor4.Id, MedicalProcedureId = procedure4.Id
+            });
+            doctor5.DoctorMedicalProcedures.Add( new DoctorMedicalProcedure()
+            {
+                DoctorId = doctor5.Id, MedicalProcedureId = procedure5.Id
+            });
+            doctor3.DoctorMedicalProcedures.Add( new DoctorMedicalProcedure()
+            {
+                DoctorId = doctor3.Id, MedicalProcedureId = procedure4.Id
+            });
+            doctor3.DoctorMedicalProcedures.Add( new DoctorMedicalProcedure()
+            {
+                DoctorId = doctor3.Id, MedicalProcedureId = procedure5.Id
+            });
+            dbContext.SaveChanges();
+
         }
-        
     }
 }

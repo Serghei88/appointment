@@ -15,6 +15,11 @@
           <e p="MedicalProceduresController.cs" t="Include" />
         </e>
         <e p="DatabaseInitializer.cs" t="Include" />
+        <e p="Migrations" t="Include">
+          <e p="20200927144750_initial.Designer.cs" t="Include" />
+          <e p="20200927144750_initial.cs" t="Include" />
+          <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
+        </e>
         <e p="Profiles" t="Include">
           <e p="MappingProfile.cs" t="Include" />
         </e>
@@ -40,6 +45,7 @@
         <e p="DTO" t="Include">
           <e p="AppointmentDTO.cs" t="Include" />
           <e p="DoctorDTO.cs" t="Include" />
+          <e p="DoctorMedicalProcedureDTO.cs" t="Include" />
           <e p="MedicalProcedureDTO.cs" t="Include" />
           <e p="UserDTO.cs" t="Include" />
         </e>
@@ -47,6 +53,7 @@
           <e p="ApplicationUser.cs" t="Include" />
           <e p="Appointment.cs" t="Include" />
           <e p="Doctor.cs" t="Include" />
+          <e p="DoctorMedicalProcedure.cs" t="Include" />
           <e p="MedicalProcedure.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
@@ -78,36 +85,48 @@
         <e p="Data" t="Include">
           <e p="ApplicationDbContext.cs" t="Include" />
           <e p="DatabaseInitializer.cs" t="Include" />
+          <e p="Interfaces" t="Include">
+            <e p="IPasswordGenerator.cs" t="Include" />
+          </e>
           <e p="MappingProfile.cs" t="Include" />
           <e p="Migrations" t="Include">
             <e p="00000000000000_CreateIdentitySchema.Designer.cs" t="Include" />
             <e p="00000000000000_CreateIdentitySchema.cs" t="Include" />
-            <e p="20200923215810_customize_identity_user.Designer.cs" t="Include" />
-            <e p="20200923215810_customize_identity_user.cs" t="Include" />
+            <e p="20200927145035_initial.Designer.cs" t="Include" />
+            <e p="20200927145035_initial.cs" t="Include" />
             <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
           </e>
+          <e p="RandomPasswordGenerator.cs" t="Include" />
           <e p="WeatherForecast.cs" t="Include" />
           <e p="WeatherForecastService.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
           <e p="AppSettingsModel.cs" t="Include" />
-          <e p="AppointmentViewModel.cs" t="Include" />
-          <e p="DoctorViewModel.cs" t="Include" />
-          <e p="MedicalProcedureViewModel.cs" t="Include" />
-          <e p="UserViewModel.cs" t="Include" />
+          <e p="ViewModels" t="Include">
+            <e p="AppointmentViewModel.cs" t="Include" />
+            <e p="DoctorMedicalProcedureViewModel.cs" t="Include" />
+            <e p="DoctorViewModel.cs" t="Include" />
+            <e p="MedicalProcedureViewModel.cs" t="Include" />
+            <e p="UserViewModel.cs" t="Include" />
+          </e>
         </e>
         <e p="Pages" t="Include">
           <e p="Appointment" t="Include">
+            <e p="Create.razor" t="Include" />
             <e p="FetchData.razor" t="Include" />
+            <e p="Form.razor" t="Include" />
           </e>
-          <e p="Counter.razor" t="Include" />
           <e p="Doctor" t="Include">
+            <e p="Edit.razor" t="Include" />
             <e p="FetchData.razor" t="Include" />
+            <e p="Form.razor" t="Include" />
           </e>
           <e p="Error.razor" t="Include" />
           <e p="Index.razor" t="Include" />
           <e p="MedicalProcedure" t="Include">
+            <e p="Edit.razor" t="Include" />
             <e p="FetchData.razor" t="Include" />
+            <e p="Form.razor" t="Include" />
           </e>
           <e p="_Host.cshtml" t="Include" />
         </e>

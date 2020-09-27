@@ -11,10 +11,8 @@ namespace Appointment.API.Profiles
             CreateMap<UserDTO, ApplicationUser>().ReverseMap();
             CreateMap<DoctorDTO, Doctor>().ReverseMap();
             CreateMap<MedicalProcedureDTO, MedicalProcedure>().ReverseMap();
-            CreateMap<AppointmentDTO, Shared.Model.Appointment>().ForMember(x => x.ApplicationUser,
-                    dest =>
-                        dest.MapFrom(src => src.User))
-                .ReverseMap();
+            CreateMap<DoctorMedicalProcedureDTO, DoctorMedicalProcedure>().ReverseMap();
+            CreateMap<AppointmentDTO, Shared.Model.Appointment>().ReverseMap();
         }
     }
 }

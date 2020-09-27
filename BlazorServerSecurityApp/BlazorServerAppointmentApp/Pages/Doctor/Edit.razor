@@ -1,0 +1,44 @@
+@page "/doctors/add/"
+@page "/doctors/edit/{Id:long}"
+@using BlazorServerAppointmentApp.Model
+@inject HttpClient http
+@inject NavigationManager UriHelper
+
+@if (Id != 0)
+{
+    <h3>Edit</h3>
+}
+else
+{
+    <h3>Create</h3>
+}
+<Form ButtonText= "@(Id == 0 ? "Create Doctor": "Update Doctor")" Doctor="@doctorViewModel"
+            OnValidSubmit="@CreateOrUpdateDoctor" MedicalProcedures="@_medicalProcedureViewModels" />
+@code {
+    [Parameter]
+    public long Id { get; set; }
+    
+    DoctorViewModel doctorViewModel = new DoctorViewModel();
+    List<MedicalProcedureViewModel> _medicalProcedureViewModels = new List<MedicalProcedureViewModel>();
+    
+    async Task CreateOrUpdateDoctor()
+    {
+        await StateProvider.CreateOrUpdateDoctor(doctorViewModel);
+        UriHelper.NavigateTo($"doctors");
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        if (Id != 0)
+        {
+            doctorViewModel = await StateProvider.GetDoctor(Id);
+        }
+        _medicalProcedureViewModels = await StateProvider.GetMedicalProcedures();
+    }
+    
+    [CascadingParameter]
+    StateProvider StateProvider { get; set; }
+
+    protected override void OnInitialized() => StateProvider.OnChange += StateHasChanged;
+    public void Dispose() => StateProvider.OnChange -= StateHasChanged;
+}

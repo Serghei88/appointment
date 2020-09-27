@@ -8,6 +8,6 @@ namespace Appointment.Shared.DTO
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
-        public IList<MedicalProcedureDTO> MedicalProcedures { get; set; }
+        public IList<DoctorMedicalProcedureDTO> DoctorMedicalProcedures { get; set; }
     }
 }
