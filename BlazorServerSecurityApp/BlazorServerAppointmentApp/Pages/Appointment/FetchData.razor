@@ -8,7 +8,11 @@
                 AllowSorting="true" Data="@Appointments" TItem="AppointmentViewModel" ColumnWidth="200px">
         <Columns>
             <RadzenGridColumn TItem="AppointmentViewModel" Property="Id" Title="Doctor ID" />
-            <RadzenGridColumn TItem="AppointmentViewModel" Property="User.Lastname" Title="User" />
+            <RadzenGridColumn TItem="AppointmentViewModel" Property="User" Title="Id">
+                            <Template Context="data">
+                                @data.User.Id
+                            </Template>
+            </RadzenGridColumn>
             <RadzenGridColumn TItem="AppointmentViewModel" Property="Time" Title="Time" />
         </Columns>
     </RadzenGrid>

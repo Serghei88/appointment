@@ -41,7 +41,7 @@ namespace Appointment.API.Migrations
                 {
                     Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<long>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     Time = table.Column<DateTime>(nullable: false),
                     MedicalProcedureId = table.Column<long>(nullable: true)
                 },
@@ -57,7 +57,7 @@ namespace Appointment.API.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DoctorMedicalProcedure",
+                name: "DoctorMedicalProcedures",
                 columns: table => new
                 {
                     DoctorId = table.Column<long>(nullable: false),
@@ -65,15 +65,15 @@ namespace Appointment.API.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DoctorMedicalProcedure", x => new { x.DoctorId, x.MedicalProcedureId });
+                    table.PrimaryKey("PK_DoctorMedicalProcedures", x => new { x.DoctorId, x.MedicalProcedureId });
                     table.ForeignKey(
-                        name: "FK_DoctorMedicalProcedure_Doctors_DoctorId",
+                        name: "FK_DoctorMedicalProcedures_Doctors_DoctorId",
                         column: x => x.DoctorId,
                         principalTable: "Doctors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DoctorMedicalProcedure_MedicalProcedures_MedicalProcedureId",
+                        name: "FK_DoctorMedicalProcedures_MedicalProcedures_MedicalProcedureId",
                         column: x => x.MedicalProcedureId,
                         principalTable: "MedicalProcedures",
                         principalColumn: "Id",
@@ -86,8 +86,8 @@ namespace Appointment.API.Migrations
                 column: "MedicalProcedureId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_DoctorMedicalProcedure_MedicalProcedureId",
-                table: "DoctorMedicalProcedure",
+                name: "IX_DoctorMedicalProcedures_MedicalProcedureId",
+                table: "DoctorMedicalProcedures",
                 column: "MedicalProcedureId");
         }
 
@@ -97,7 +97,7 @@ namespace Appointment.API.Migrations
                 name: "Appointments");
 
             migrationBuilder.DropTable(
-                name: "DoctorMedicalProcedure");
+                name: "DoctorMedicalProcedures");
 
             migrationBuilder.DropTable(
                 name: "Doctors");

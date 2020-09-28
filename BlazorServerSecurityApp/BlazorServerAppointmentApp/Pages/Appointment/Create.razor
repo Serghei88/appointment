@@ -7,12 +7,16 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject UserManager<ApplicationUser> UserManager
 
-<Form ButtonText= "Create appointment"
-      OnValidSubmit="@CreateNewAppointment" AppointmentViewModel="@_appointmentViewModel" />
+<Form ButtonText= "Create appointment" MedicalProcedureViewModels="@_medicalProcedureViewModels"
+      AppointmentViewModel="@_appointmentViewModel"/>
       
       
 @code{
       AppointmentViewModel _appointmentViewModel = new AppointmentViewModel();
+      List<MedicalProcedureViewModel> _medicalProcedureViewModels = new List<MedicalProcedureViewModel>();
+      private CustomValidator customValidator = new CustomValidator();
+      
+
       protected override async Task OnInitializedAsync()
       {
             var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -21,17 +25,13 @@
 
             if (authState.User.Identity.IsAuthenticated && user != null)
             {
+                  _appointmentViewModel.User.Id = user.Id;
                   _appointmentViewModel.User.Email = user.Email;
                   _appointmentViewModel.User.FirstName = user.FirstName;
                   _appointmentViewModel.User.LastName = user.LastName;
                   _appointmentViewModel.User.PhoneNumber = user.PhoneNumber;
             }
-      }
-  
-      async Task CreateNewAppointment()
-      {
-            // await StateProvider.CreateOrUpdateMedicalProcedure(medicalProcedure);
-            UriHelper.NavigateTo($"medicalprocedures");
+            _medicalProcedureViewModels = await StateProvider.GetMedicalProcedures();
       }
       
           

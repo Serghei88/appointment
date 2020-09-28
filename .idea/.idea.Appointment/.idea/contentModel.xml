@@ -16,8 +16,8 @@
         </e>
         <e p="DatabaseInitializer.cs" t="Include" />
         <e p="Migrations" t="Include">
-          <e p="20200927144750_initial.Designer.cs" t="Include" />
-          <e p="20200927144750_initial.cs" t="Include" />
+          <e p="20200928214128_initial.Designer.cs" t="Include" />
+          <e p="20200928214128_initial.cs" t="Include" />
           <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
         </e>
         <e p="Profiles" t="Include">
@@ -48,6 +48,7 @@
           <e p="DoctorMedicalProcedureDTO.cs" t="Include" />
           <e p="MedicalProcedureDTO.cs" t="Include" />
           <e p="UserDTO.cs" t="Include" />
+          <e p="ValidationDTO.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
           <e p="ApplicationUser.cs" t="Include" />
@@ -102,6 +103,7 @@
         </e>
         <e p="Model" t="Include">
           <e p="AppSettingsModel.cs" t="Include" />
+          <e p="CustomValidator.cs" t="Include" />
           <e p="ViewModels" t="Include">
             <e p="AppointmentViewModel.cs" t="Include" />
             <e p="DoctorMedicalProcedureViewModel.cs" t="Include" />

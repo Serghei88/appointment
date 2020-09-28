@@ -10,6 +10,7 @@ namespace BlazorServerAppointmentApp.Data
     public class ApplicationDbContext : DbContext
     {
         public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<DoctorMedicalProcedure> DoctorMedicalProcedures { get; set; }
         public DbSet<MedicalProcedure> MedicalProcedures { get; set; }
         public DbSet<Appointment.Shared.Model.Appointment> Appointments { get; set; }
 

@@ -1,10 +1,11 @@
+using System.Linq;
 using System.Threading.Tasks;
 using Appointment.Shared.DTO;
-using Appointment.Shared.Model;
 using AutoMapper;
 using BlazorServerAppointmentApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Appointment = Appointment.Shared.Model.Appointment;
 
 namespace Appointment.API.Controllers
 {
@@ -27,6 +28,20 @@ namespace Appointment.API.Controllers
             return Ok(appointments);
         }
         
+        [HttpPost]
+        [Route("check")]
+        public async Task<IActionResult> CheckAvailability(AppointmentDTO appointmentDto)
+        {
+            var appointments = await _context.Appointments
+                .Where(x=> x.MedicalProcedure.Id == appointmentDto.MedicalProcedure.Id &&
+                           x.Time == appointmentDto.Time)
+                .CountAsync();
+            var doctorMedicalPrCount = await _context.DoctorMedicalProcedures
+                .Where(x => x.MedicalProcedureId == appointmentDto.MedicalProcedure.Id).CountAsync();
+            
+            return Ok(appointments < doctorMedicalPrCount);
+        }
+        
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
@@ -37,7 +52,12 @@ namespace Appointment.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(AppointmentDTO appointmentDto)
         {
-            var appointment = _mapper.Map<Shared.Model.Appointment>(appointmentDto);
+            var appointment = new Shared.Model.Appointment()
+            {
+                Time = appointmentDto.Time,
+                UserId = appointmentDto.UserId,
+                MedicalProcedure = _context.MedicalProcedures.FirstOrDefault(x=>x.Id == appointmentDto.MedicalProcedure.Id)
+            };
             _context.Add(appointment);
             await _context.SaveChangesAsync();
             return Ok(appointment.Id); 

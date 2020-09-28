@@ -17,5 +17,9 @@
       <ProjectReference Include="..\Appointment.Shared\Appointment.Shared.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Migrations" />
+    </ItemGroup>
+
 
 </Project>

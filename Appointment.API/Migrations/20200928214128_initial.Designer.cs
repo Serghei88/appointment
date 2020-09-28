@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Appointment.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200927144750_initial")]
+    [Migration("20200928214128_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,8 +34,8 @@ namespace Appointment.API.Migrations
                     b.Property<DateTime>("Time")
                         .HasColumnType("datetime2");
 
-                    b.Property<long>("UserId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -74,7 +74,7 @@ namespace Appointment.API.Migrations
 
                     b.HasIndex("MedicalProcedureId");
 
-                    b.ToTable("DoctorMedicalProcedure");
+                    b.ToTable("DoctorMedicalProcedures");
                 });
 
             modelBuilder.Entity("Appointment.Shared.Model.MedicalProcedure", b =>
