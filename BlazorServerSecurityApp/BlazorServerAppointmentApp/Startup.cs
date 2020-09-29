@@ -9,6 +9,7 @@ using BlazorServerAppointmentApp.Areas.Identity;
 using BlazorServerAppointmentApp.Data;
 using BlazorServerAppointmentApp.Data.Interfaces;
 using BlazorServerAppointmentApp.Model;
+using BlazorServerAppointmentApp.Model.Email;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -16,6 +17,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -49,6 +51,10 @@ namespace BlazorServerAppointmentApp
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped(s => new AppSettingsModel(Configuration.GetSection("AppSettings")));
             services.AddScoped<IPasswordGenerator, RandomPasswordGenerator>();
+            
+            services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
+            services.AddSingleton<IEmailSender, EmailSender>();
+
             
             // Server Side Blazor doesn't register HttpClient by default
             if (services.All(x => x.ServiceType != typeof(HttpClient)))

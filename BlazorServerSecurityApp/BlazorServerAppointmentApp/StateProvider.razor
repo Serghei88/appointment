@@ -102,7 +102,7 @@
         return Mapper.Map<List<AppointmentViewModel>>(await HttpClient.GetFromJsonAsync<AppointmentDTO[]>(uri));
     }
     
-    private async Task ChangeState()
+    private void ChangeState()
     {
         OnChange?.Invoke();
     }

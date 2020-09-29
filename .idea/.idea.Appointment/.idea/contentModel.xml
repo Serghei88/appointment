@@ -86,9 +86,6 @@
         <e p="Data" t="Include">
           <e p="ApplicationDbContext.cs" t="Include" />
           <e p="DatabaseInitializer.cs" t="Include" />
-          <e p="Interfaces" t="Include">
-            <e p="IPasswordGenerator.cs" t="Include" />
-          </e>
           <e p="MappingProfile.cs" t="Include" />
           <e p="Migrations" t="Include">
             <e p="00000000000000_CreateIdentitySchema.Designer.cs" t="Include" />
@@ -97,13 +94,15 @@
             <e p="20200927145035_initial.cs" t="Include" />
             <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
           </e>
-          <e p="RandomPasswordGenerator.cs" t="Include" />
           <e p="WeatherForecast.cs" t="Include" />
           <e p="WeatherForecastService.cs" t="Include" />
         </e>
         <e p="Model" t="Include">
           <e p="AppSettingsModel.cs" t="Include" />
           <e p="CustomValidator.cs" t="Include" />
+          <e p="Email" t="Include">
+            <e p="EmailSettings.cs" t="Include" />
+          </e>
           <e p="ViewModels" t="Include">
             <e p="AppointmentViewModel.cs" t="Include" />
             <e p="DoctorMedicalProcedureViewModel.cs" t="Include" />
@@ -137,6 +136,13 @@
           <e p="launchSettings.json" t="Include" />
           <e p="serviceDependencies.json" t="Include" />
           <e p="serviceDependencies.local.json" t="Include" />
+        </e>
+        <e p="Services" t="Include">
+          <e p="EmailSender.cs" t="Include" />
+          <e p="Interfaces" t="Include">
+            <e p="IPasswordGenerator.cs" t="Include" />
+          </e>
+          <e p="RandomPasswordGenerator.cs" t="Include" />
         </e>
         <e p="Shared" t="Include">
           <e p="LoginDisplay.razor" t="Include" />
