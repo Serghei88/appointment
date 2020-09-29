@@ -71,13 +71,27 @@
         <e p="App.razor" t="Include" />
         <e p="Areas" t="Include">
           <e p="Identity" t="Include">
+            <e p="IdentityHostingStartup.cs" t="Include" />
             <e p="Pages" t="Include">
               <e p="Account" t="Include">
                 <e p="LogOut.cshtml" t="Include" />
+                <e p="Manage" t="Include">
+                  <e p="Index.cshtml" t="Include" />
+                  <e p="Index.cshtml.cs" t="Include" />
+                  <e p="ManageNavPages.cs" t="Include" />
+                  <e p="_ManageNav.cshtml" t="Include" />
+                  <e p="_StatusMessage.cshtml" t="Include" />
+                  <e p="_ViewImports.cshtml" t="Include" />
+                </e>
+                <e p="Register.cshtml" t="Include" />
+                <e p="Register.cshtml.cs" t="Include" />
+                <e p="_ViewImports.cshtml" t="Include" />
               </e>
               <e p="Shared" t="Include">
                 <e p="_LoginPartial.cshtml" t="Include" />
               </e>
+              <e p="_ViewImports.cshtml" t="Include" />
+              <e p="_ViewStart.cshtml" t="Include" />
             </e>
             <e p="RevalidatingIdentityAuthenticationStateProvider.cs" t="Include" />
           </e>
@@ -129,7 +143,14 @@
             <e p="FetchData.razor" t="Include" />
             <e p="Form.razor" t="Include" />
           </e>
+          <e p="Shared" t="Include">
+            <e p="_Layout.cshtml" t="Include" />
+            <e p="_LoginPartial.cshtml" t="Include" />
+            <e p="_ValidationScriptsPartial.cshtml" t="Include" />
+          </e>
           <e p="_Host.cshtml" t="Include" />
+          <e p="_ViewImports.cshtml" t="Include" />
+          <e p="_ViewStart.cshtml" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">

@@ -20,16 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b189cac-4eaf-4dea-b82e-102fa1f90025" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Model/Email/EmailSettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Services/EmailSender.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/IdentityHostingStartup.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/Index.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/ManageNavPages.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/_StatusMessage.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Register.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Register.cshtml.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/_ViewStart.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/Shared/_Layout.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/Shared/_LoginPartial.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/Shared/_ValidationScriptsPartial.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/_ViewImports.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/_ViewStart.cshtml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/ScaffoldingReadMe.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Appointment/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Appointment/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Appointment/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Appointment/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/BlazorServerAppointmentApp.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/BlazorServerAppointmentApp.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Data/Interfaces/IPasswordGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Services/Interfaces/IPasswordGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Data/RandomPasswordGenerator.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Services/RandomPasswordGenerator.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/Index.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/Index.razor" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/StateProvider.razor" beforeDir="false" afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/StateProvider.razor" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -41,35 +51,33 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Appointment.Shared/Model/Doctor.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/714153FB-3DE5-4537-8A59-8AE8F7F7655E/aa/e6853158/ExceptionDispatchInfo.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/176FABC6-514A-4BCC-A1C7-EA88599D07DA/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E93F5310-A38B-447C-BDC7-EEE75999F6D8/10/0aa12519/RadzenGrid`1.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/21/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/eltar/projects/Appointment/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/Appointment/Form.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Model/ViewModels/UserViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Model/ViewModels/MedicalProcedureViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Model/ViewModels/DoctorViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Model/ViewModels/AppointmentViewModel.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/110B974C-AC7A-40C0-93D1-F14804FCEE2B/1D/UserManager.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ED273EFC-298A-47B3-AB05-5F1821DF6B03/9b/d36eb34b/SmtpClient.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B8F48895-CCCD-49F9-A60A-EFCCC150F4E5/ac/b7b0dde4/ComponentBase.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CAFAFF80-8A29-4226-BE36-8DD5FC69CC02/ad/6ba430ed/HttpClient.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/appsettings.json" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F894CA91-3348-42B4-8B2A-EAF67F48BABF/4f/500c5a3d/AuthenticationState.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/eltar/projects/Appointment/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/Appointment/Create.razor" root0="SKIP_HIGHLIGHTING" root1="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Appointment.Shared/Model/ApplicationUser.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/CA9AC8DB-A5FF-4CF3-9060-56D38E8CE521/50/0d1b3b4b/HostingLoggerExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Appointment.Shared/Model/MedicalProcedure.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Appointment.Shared/Model/Appointment.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Appointment.Shared/Model/Doctor.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/176FABC6-514A-4BCC-A1C7-EA88599D07DA/3/IdentityUser.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/E93F5310-A38B-447C-BDC7-EEE75999F6D8/10/0aa12519/RadzenGrid`1.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Data/ApplicationDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3680BE5F-1887-4743-9788-D707F1CB36B7/21/EntityFrameworkQueryableExtensions.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/obj/Debug/netcoreapp3.1/Razor/Areas/Identity/Pages/Shared/_LoginPartial.cshtml.g.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ED273EFC-298A-47B3-AB05-5F1821DF6B03/9b/d36eb34b/SmtpClient.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/B8F48895-CCCD-49F9-A60A-EFCCC150F4E5/ac/b7b0dde4/ComponentBase.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F894CA91-3348-42B4-8B2A-EAF67F48BABF/4f/500c5a3d/AuthenticationState.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/App.razor" />
-        <option value="$PROJECT_DIR$/Appointment.API/Controllers/AppointmentController.cs" />
-        <option value="$PROJECT_DIR$/Appointment.API/Controllers/MedicalProcedureController.cs" />
-        <option value="$PROJECT_DIR$/Appointment.API/Properties/launchSettings.json" />
-        <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Model/AppSettingsModel.cs" />
         <option value="$PROJECT_DIR$/Appointment.API/appsettings.json" />
         <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/_Imports.razor" />
         <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Shared/MainLayout.razor" />
@@ -116,6 +124,11 @@
         <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Pages/Index.razor" />
         <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Services/EmailSender.cs" />
         <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/appsettings.json" />
+        <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/_StatusMessage.cshtm.cshtml" />
+        <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/_ManageNav.cshtml" />
+        <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/Index.cshtml.cs" />
+        <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Manage/Index.cshtml" />
+        <option value="$PROJECT_DIR$/BlazorServerSecurityApp/BlazorServerAppointmentApp/Areas/Identity/Pages/Account/Register.cshtml.cs" />
       </list>
     </option>
   </component>
@@ -297,22 +310,22 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="744" y="314" key="FileChooserDialogImpl/0.30.1920.1050@0.30.1920.1050" timestamp="1601222336810" />
-    <state width="1864" height="366" key="GridCell.Tab.0.bottom" timestamp="1601413223187">
+    <state width="1872" height="271" key="GridCell.Tab.0.bottom" timestamp="1601419026296">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1864" height="366" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1601413223187" />
-    <state width="1864" height="366" key="GridCell.Tab.0.center" timestamp="1601413223186">
+    <state width="1872" height="271" key="GridCell.Tab.0.bottom/0.30.1920.1050@0.30.1920.1050" timestamp="1601419026296" />
+    <state width="1872" height="271" key="GridCell.Tab.0.center" timestamp="1601419026296">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1864" height="366" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1601413223186" />
-    <state width="1864" height="366" key="GridCell.Tab.0.left" timestamp="1601413223185">
+    <state width="1872" height="271" key="GridCell.Tab.0.center/0.30.1920.1050@0.30.1920.1050" timestamp="1601419026296" />
+    <state width="1872" height="271" key="GridCell.Tab.0.left" timestamp="1601419026295">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1864" height="366" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1601413223185" />
-    <state width="1864" height="366" key="GridCell.Tab.0.right" timestamp="1601413223187">
+    <state width="1872" height="271" key="GridCell.Tab.0.left/0.30.1920.1050@0.30.1920.1050" timestamp="1601419026295" />
+    <state width="1872" height="271" key="GridCell.Tab.0.right" timestamp="1601419026296">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state width="1864" height="366" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1601413223187" />
+    <state width="1872" height="271" key="GridCell.Tab.0.right/0.30.1920.1050@0.30.1920.1050" timestamp="1601419026296" />
     <state width="1864" height="366" key="GridCell.Tab.1.bottom" timestamp="1601413223189">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
@@ -381,10 +394,10 @@
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
     <state x="556" y="291" key="Rider.ProjectTemplateDialog.Size/0.30.1920.1050@0.30.1920.1050" timestamp="1600987395356" />
-    <state x="672" y="221" key="RollbackChangesDialog" timestamp="1601331559975">
+    <state x="672" y="221" key="RollbackChangesDialog" timestamp="1601418396779">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
-    <state x="672" y="221" key="RollbackChangesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1601331559975" />
+    <state x="672" y="221" key="RollbackChangesDialog/0.30.1920.1050@0.30.1920.1050" timestamp="1601418396779" />
     <state x="556" y="292" key="Vcs.Push.Dialog.v2" timestamp="1601331070194">
       <screen x="0" y="30" width="1920" height="1050" />
     </state>
