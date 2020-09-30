@@ -5,9 +5,8 @@
 @using Appointment.Shared.DTO
 @using AutoMapper
 @using BlazorServerAppointmentApp.Data
-@inject HttpClient HttpClient
-@inject AppSettingsModel Settings
-@inject IMapper Mapper
+@using BlazorServerAppointmentApp.Data.Interfaces
+@inject IAppointmentService AppointmentService
 
 <CascadingValue Value="@this">
     @ChildContent
@@ -17,90 +16,7 @@
     [Parameter]
     public RenderFragment ChildContent { get; set; }
     public event Action OnChange;
-
-    public async Task<bool> CheckAppointmentAvailability(AppointmentViewModel appointmentViewModel)
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/appointments/check");
-        var dto = Mapper.Map<AppointmentDTO>(appointmentViewModel);
-        var response = await HttpClient.PostAsJsonAsync(uri, dto);
-
-        return  await response.Content.ReadAsAsync<bool>();
-    }
-
-    public async Task CreateAppointment(AppointmentViewModel appointmentViewModel)
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/appointments");
-        var dto = Mapper.Map<AppointmentDTO>(appointmentViewModel);
-        await HttpClient.PostAsJsonAsync(uri, dto);
-    }
     
-    public async Task<List<DoctorViewModel>> GetDoctors()
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/doctors");
-        return Mapper.Map<List<DoctorViewModel>>(await HttpClient.GetFromJsonAsync<DoctorDTO[]>(uri));
-    }
-    public async Task<DoctorViewModel> GetDoctor(long Id)
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/doctors/{Id}");
-        return Mapper.Map<DoctorViewModel>(await HttpClient.GetFromJsonAsync<DoctorDTO>(uri));
-    }
-
-    public async Task CreateOrUpdateDoctor(DoctorViewModel doctor)
-    {
-        var dto = Mapper.Map<DoctorDTO>(doctor);
-        Uri uri = new Uri($"{Settings.WebApiUrl}/doctors");
-        if (doctor.Id == 0)
-        {
-            await HttpClient.PostAsJsonAsync(uri, dto);
-        }
-        else
-        {
-            await HttpClient.PutAsJsonAsync(uri, dto);
-        }
-    }
-    public async Task DeleteDoctor(long doctorId)
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/doctors/{doctorId}");
-        await HttpClient.DeleteAsync(uri);
-    }
-
-    public async Task<List<MedicalProcedureViewModel>> GetMedicalProcedures()
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/medicalprocedures");
-        return Mapper.Map<List<MedicalProcedureViewModel>>(await HttpClient.GetFromJsonAsync<MedicalProcedureDTO[]>(uri));
-    }
-    
-    public async Task<MedicalProcedureViewModel> GetMedicalProcedure(long Id)
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/medicalprocedures/{Id}");
-        return Mapper.Map<MedicalProcedureViewModel>(await HttpClient.GetFromJsonAsync<MedicalProcedureDTO>(uri));
-    }
-
-    public async Task CreateOrUpdateMedicalProcedure(MedicalProcedureViewModel medicalProcedureViewModel)
-    {
-        var dto = Mapper.Map<MedicalProcedureDTO>(medicalProcedureViewModel);
-        Uri uri = new Uri($"{Settings.WebApiUrl}/medicalprocedures");
-        if (medicalProcedureViewModel.Id == 0)
-        {
-            await HttpClient.PostAsJsonAsync(uri, dto);
-        }
-        else
-        {
-            await HttpClient.PutAsJsonAsync(uri, dto);
-        }
-    }
-    
-    public async Task DeleteMedicalProcedure(long medicalProcedureId)
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/medicalprocedures/{medicalProcedureId}");
-        await HttpClient.DeleteAsync(uri);
-    }
-    
-    public async Task<List<AppointmentViewModel>> GetAppointments()
-    {
-        Uri uri = new Uri($"{Settings.WebApiUrl}/appointments");
-        return Mapper.Map<List<AppointmentViewModel>>(await HttpClient.GetFromJsonAsync<AppointmentDTO[]>(uri));
-    }
     
     private void ChangeState()
     {

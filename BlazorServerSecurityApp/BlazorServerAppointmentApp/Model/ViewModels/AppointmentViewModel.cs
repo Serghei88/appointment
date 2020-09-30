@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BlazorServerAppointmentApp.Model
 {
@@ -11,7 +12,10 @@ namespace BlazorServerAppointmentApp.Model
         
         public long Id { get; set; }
         public UserViewModel User { get; set; }
+        [Required]
         public DateTime Time { get; set; }
         public long MedicalProcedureId { get; set; }
+
+        public MedicalProcedureViewModel MedicalProcedure { get; set; }
     }
 }

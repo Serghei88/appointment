@@ -1,11 +1,12 @@
 @using BlazorServerAppointmentApp.Model
+@using BlazorServerAppointmentApp.Model.Validation
+@using BlazorServerAppointmentApp.Data.Interfaces
 @inject NavigationManager UriHelper
+@inject IAppointmentService AppointmentService
 
 
 <EditForm Model="@AppointmentViewModel" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-    <CustomValidator @ref="customValidator" />
+    <FluentValidator></FluentValidator>
     <div class="form-group">
         <label>First Name :</label>
         <div>
@@ -42,6 +43,7 @@
                                HoursStep="1" ShowSeconds="false"
                                DateRender="@DateRender"
                                Change="@(args => ChangeTime(args, "DatePicker", "dd/MM/yyyy"))" />
+            <ValidationMessage For="@(() => AppointmentViewModel.Time)" />
         </div>
     </div>
 
@@ -49,51 +51,32 @@
         <label>Medical Procedure :</label>
         <div>
             <RadzenDropDownDataGrid TValue="long" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true" AllowClear="true" 
-                                            Data="@(MedicalProcedureViewModels.Select(c => new { Id = c.Id, Name = c.Name }).Distinct().AsQueryable())" 
-                                            TextProperty="Name" ValueProperty="Id" Style="margin-bottom: 20px" 
-                                            Change="@(args => Change(args, "DropDownDataGrid"))" />
+                                    Data="@(MedicalProcedureViewModels.Select(c => new { Id = c.Id, Name = c.Name }).Distinct().AsQueryable())" 
+                                    TextProperty="Name" ValueProperty="Id" Style="margin-bottom: 20px" 
+                                    Change="@(args => Change(args, "DropDownDataGrid"))" />
+            <ValidationMessage For="@(() => AppointmentViewModel.MedicalProcedureId)" />
+            <ValidationMessage For="@(() => AppointmentViewModel)" />
+
         </div>
     </div>
-    
-    
-
     <button type="submit" class="btn btn-success">
         @ButtonText
     </button>
-
 </EditForm>
+
 @code {
-    [Parameter] public AppointmentViewModel AppointmentViewModel { get; set; }
+
+    [Parameter]
+    public AppointmentViewModel AppointmentViewModel { get; set; }
+
     [Parameter] public List<MedicalProcedureViewModel> MedicalProcedureViewModels { get; set; }
     [Parameter] public string ButtonText { get; set; } = "Save";
-
-    private CustomValidator customValidator;
 
     
     private async Task HandleValidSubmit()
     {
-        customValidator.ClearErrors();
-
-        var errors = new Dictionary<string, List<string>>();
-
-        var available = await StateProvider.CheckAppointmentAvailability(AppointmentViewModel);
-        if (!available)
-        {
-            errors.Add(nameof(AppointmentViewModel.Time),
-                new List<string>() { $"Appointment for selected procedure at {AppointmentViewModel.Time} not available" });
-        }
-
-        if (errors.Any())
-        {
-            customValidator.DisplayErrors(errors);
-        }
-        else
-        {
-            // create user if doesn't exist
-            await StateProvider.CreateAppointment(AppointmentViewModel);
-            UriHelper.NavigateTo($"/");
-
-        }
+        await AppointmentService.CreateAppointment(AppointmentViewModel);
+        UriHelper.NavigateTo($"/");
     }
 
     

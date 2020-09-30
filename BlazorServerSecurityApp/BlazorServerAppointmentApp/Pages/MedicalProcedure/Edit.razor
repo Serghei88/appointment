@@ -1,9 +1,11 @@
 @page "/medicalprocedures/add/"
 @page "/medicalprocedures/edit/{Id:long}"
 @using BlazorServerAppointmentApp.Model
+@using BlazorServerAppointmentApp.Data.Interfaces
 
 @inject HttpClient http
 @inject NavigationManager UriHelper
+@inject IAppointmentService AppointmentService
 
 
 @if (Id != 0)
@@ -23,7 +25,7 @@ else
     MedicalProcedureViewModel medicalProcedure = new MedicalProcedureViewModel();
     async Task CreateOrUpdateMedicalProcedure()
     {
-        await StateProvider.CreateOrUpdateMedicalProcedure(medicalProcedure);
+        await AppointmentService.CreateOrUpdateMedicalProcedure(medicalProcedure);
         UriHelper.NavigateTo($"medicalprocedures");
     }
     
@@ -31,7 +33,7 @@ else
     {
         if (Id != 0)
         {
-            medicalProcedure = await StateProvider.GetMedicalProcedure(Id);
+            medicalProcedure = await AppointmentService.GetMedicalProcedure(Id);
         }
     }
     

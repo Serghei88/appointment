@@ -1,8 +1,10 @@
 @attribute [Authorize(Roles = "Administrator")]
 @page "/doctors"
 @using BlazorServerAppointmentApp.Model
+@using BlazorServerAppointmentApp.Data.Interfaces
 @inject NavigationManager UriHelper
 @inject DialogService dialogService
+@inject IAppointmentService AppointmentService
 
 <h3>Doctors</h3>
 
@@ -30,8 +32,8 @@
 @code {
     private async Task DeleteDoctor(long doctorId)
     {
-        await StateProvider.DeleteDoctor(doctorId);
-        doctors = await StateProvider.GetDoctors();
+        await AppointmentService.DeleteDoctor(doctorId);
+        doctors = await AppointmentService.GetDoctors();
         StateHasChanged();
         dialogService.Close();
     }
@@ -52,7 +54,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        doctors = await StateProvider.GetDoctors();
+        doctors = await AppointmentService.GetDoctors();
     }
 
     [CascadingParameter]

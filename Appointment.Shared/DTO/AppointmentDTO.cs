@@ -8,5 +8,6 @@ namespace Appointment.Shared.DTO
         public string UserId { get; set; }
         public DateTime Time { get; set; }
         public MedicalProcedureDTO MedicalProcedure { get; set; }
+
     }
 }

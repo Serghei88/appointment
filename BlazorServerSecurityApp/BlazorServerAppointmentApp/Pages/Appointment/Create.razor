@@ -2,10 +2,12 @@
 @using BlazorServerAppointmentApp.Model
 @using global::Appointment.Shared.Model
 @using Microsoft.AspNetCore.Identity
+@using BlazorServerAppointmentApp.Data.Interfaces
 @inject HttpClient http
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject UserManager<ApplicationUser> UserManager
+@inject IAppointmentService AppointmentService
 
 <Form ButtonText= "Create appointment" MedicalProcedureViewModels="@_medicalProcedureViewModels"
       AppointmentViewModel="@_appointmentViewModel"/>
@@ -31,7 +33,7 @@
                   _appointmentViewModel.User.LastName = user.LastName;
                   _appointmentViewModel.User.PhoneNumber = user.PhoneNumber;
             }
-            _medicalProcedureViewModels = await StateProvider.GetMedicalProcedures();
+            _medicalProcedureViewModels = await AppointmentService.GetMedicalProcedures();
       }
       
           

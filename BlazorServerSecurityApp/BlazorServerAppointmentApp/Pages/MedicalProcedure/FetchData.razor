@@ -1,10 +1,11 @@
 @attribute [Authorize(Roles = "Administrator")]
 @page "/medicalprocedures"
 @using BlazorServerAppointmentApp.Model
-@using Microsoft.EntityFrameworkCore
+@using BlazorServerAppointmentApp.Data.Interfaces
 @inject NavigationManager UriHelper
 @inject DialogService dialogService
 <h3>Medical Procedures</h3>
+@inject IAppointmentService AppointmentService
 
 <RadzenButton Text=@($"Add new Medical Procedure") ButtonStyle="ButtonStyle.Primary" 
               Click="@(x=> UriHelper.NavigateTo($"medicalprocedures/add"))" />
@@ -44,8 +45,8 @@
     
     private async Task DeleteProcedure(long procedureId)
     {
-        await StateProvider.DeleteDoctor(procedureId);
-        MedicalProcedures = await StateProvider.GetMedicalProcedures();
+        await AppointmentService.DeleteDoctor(procedureId);
+        MedicalProcedures = await AppointmentService.GetMedicalProcedures();
         StateHasChanged();
         dialogService.Close();
     }
@@ -54,7 +55,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        MedicalProcedures = await StateProvider.GetMedicalProcedures();
+        MedicalProcedures = await AppointmentService.GetMedicalProcedures();
     }
     
     [CascadingParameter]

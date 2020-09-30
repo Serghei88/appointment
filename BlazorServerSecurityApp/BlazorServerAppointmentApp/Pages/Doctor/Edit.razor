@@ -1,8 +1,10 @@
 @page "/doctors/add/"
 @page "/doctors/edit/{Id:long}"
 @using BlazorServerAppointmentApp.Model
+@using BlazorServerAppointmentApp.Data.Interfaces
 @inject HttpClient http
 @inject NavigationManager UriHelper
+@inject IAppointmentService AppointmentService
 
 @if (Id != 0)
 {
@@ -23,7 +25,7 @@ else
     
     async Task CreateOrUpdateDoctor()
     {
-        await StateProvider.CreateOrUpdateDoctor(doctorViewModel);
+        await AppointmentService.CreateOrUpdateDoctor(doctorViewModel);
         UriHelper.NavigateTo($"doctors");
     }
     
@@ -31,9 +33,9 @@ else
     {
         if (Id != 0)
         {
-            doctorViewModel = await StateProvider.GetDoctor(Id);
+            doctorViewModel = await AppointmentService.GetDoctor(Id);
         }
-        _medicalProcedureViewModels = await StateProvider.GetMedicalProcedures();
+        _medicalProcedureViewModels = await AppointmentService.GetMedicalProcedures();
     }
     
     [CascadingParameter]

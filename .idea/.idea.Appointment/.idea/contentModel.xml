@@ -117,6 +117,10 @@
           <e p="Email" t="Include">
             <e p="EmailSettings.cs" t="Include" />
           </e>
+          <e p="Validation" t="Include">
+            <e p="AppointmentViewModelValidator.cs" t="Include" />
+            <e p="UserViewModelValidator.cs" t="Include" />
+          </e>
           <e p="ViewModels" t="Include">
             <e p="AppointmentViewModel.cs" t="Include" />
             <e p="DoctorMedicalProcedureViewModel.cs" t="Include" />
@@ -159,8 +163,10 @@
           <e p="serviceDependencies.local.json" t="Include" />
         </e>
         <e p="Services" t="Include">
+          <e p="AppointmentService.cs" t="Include" />
           <e p="EmailSender.cs" t="Include" />
           <e p="Interfaces" t="Include">
+            <e p="IAppointmentService.cs" t="Include" />
             <e p="IPasswordGenerator.cs" t="Include" />
           </e>
           <e p="RandomPasswordGenerator.cs" t="Include" />

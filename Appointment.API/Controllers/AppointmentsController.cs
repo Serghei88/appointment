@@ -24,7 +24,7 @@ namespace Appointment.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var appointments = await _context.Appointments.ToListAsync();
+            var appointments = await _context.Appointments.Include(x=>x.MedicalProcedure).ToListAsync();
             return Ok(appointments);
         }
         
@@ -39,14 +39,22 @@ namespace Appointment.API.Controllers
             var doctorMedicalPrCount = await _context.DoctorMedicalProcedures
                 .Where(x => x.MedicalProcedureId == appointmentDto.MedicalProcedure.Id).CountAsync();
             
-            return Ok(appointments < doctorMedicalPrCount);
+            return Ok( appointments < doctorMedicalPrCount);
         }
         
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var appointment = await _context.Appointments.FirstOrDefaultAsync(a=>a.Id ==id);
+            var appointment = await _context.Appointments.Include(x=>x.MedicalProcedure).FirstOrDefaultAsync(a=>a.Id ==id);
             return Ok(appointment);
+        }
+        
+        [HttpGet("userappointments/{id}")]
+        public async Task<IActionResult> GetUserAppointments(string id)
+        {
+            var appointments = await _context.Appointments.Where(a=>a.UserId == id)
+                .Include(x=>x.MedicalProcedure).ToListAsync();
+            return Ok(appointments);
         }
         
         [HttpPost]

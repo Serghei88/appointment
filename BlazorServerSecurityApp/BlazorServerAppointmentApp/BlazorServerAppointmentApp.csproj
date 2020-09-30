@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Accelist.FluentValidation.Blazor" Version="3.0.0" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
+    <PackageReference Include="FluentValidation" Version="9.3.0-preview2" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.5" />
@@ -21,6 +23,15 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Appointment.Shared\Appointment.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Model\Validation\AppointmentViewModelValidator.cs">
+      <Link>Model\Validation\AppointmentViewModelValidator.cs</Link>
+    </Compile>
+    <Compile Update="Model\Validation\UserViewModelValidator.cs">
+      <Link>Model\Validation\UserViewModelValidator.cs</Link>
+    </Compile>
   </ItemGroup>
 
 </Project>

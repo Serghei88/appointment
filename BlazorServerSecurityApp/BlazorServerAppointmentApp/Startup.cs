@@ -10,6 +10,8 @@ using BlazorServerAppointmentApp.Data;
 using BlazorServerAppointmentApp.Data.Interfaces;
 using BlazorServerAppointmentApp.Model;
 using BlazorServerAppointmentApp.Model.Email;
+using BlazorServerAppointmentApp.Model.Validation;
+using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
@@ -45,33 +47,42 @@ namespace BlazorServerAppointmentApp
             services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddHttpContextAccessor();
+            
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddSingleton<WeatherForecastService>();
             services.AddScoped(s => new AppSettingsModel(Configuration.GetSection("AppSettings")));
             services.AddScoped<IPasswordGenerator, RandomPasswordGenerator>();
+            services.AddScoped<IAppointmentService, AppointmentService>();
             
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddSingleton<IEmailSender, EmailSender>();
 
-            
             // Server Side Blazor doesn't register HttpClient by default
-            if (services.All(x => x.ServiceType != typeof(HttpClient)))
-            {
-                // Setup HttpClient for server side in a client side compatible fashion
-                services.AddScoped(s =>
-                {
-                    // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
-                    var uriHelper = s.GetRequiredService<NavigationManager>();
-                    var handler = new HttpClientHandler();
+            // if (services.All(x => x.ServiceType != typeof(HttpClient)))
+            // {
+            //     // Setup HttpClient for server side in a client side compatible fashion
+            //     services.AddScoped(s =>
+            //     {
+            //         // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
+            //         var uriHelper = s.GetRequiredService<NavigationManager>();
+            //         var handler = new HttpClientHandler();
+            //
+            //         return new HttpClient(handler)
+            //         {
+            //             BaseAddress = new Uri(uriHelper.BaseUri)
+            //         };
+            //     });
+            // }
+            services.AddScoped<HttpClient>();
+            
+            //Fluent Validator
+            // services.AddTransient<IValidator<AppointmentViewModel>, AppointmentViewModelValidator>();
+            services.AddTransient<IValidator<AppointmentViewModel>>(x => new AppointmentViewModelValidator(x.GetRequiredService<IAppointmentService>()));
 
-                    return new HttpClient(handler)
-                    {
-                        BaseAddress = new Uri(uriHelper.BaseUri)
-                    };
-                });
-            }
+            services.AddTransient<IValidator<UserViewModel>, UserViewModelValidator>();
 
             //Radzen setup
             services.AddScoped<DialogService>();
@@ -81,7 +92,6 @@ namespace BlazorServerAppointmentApp
             
             //Automapper
             services.AddAutoMapper(typeof(Startup));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
