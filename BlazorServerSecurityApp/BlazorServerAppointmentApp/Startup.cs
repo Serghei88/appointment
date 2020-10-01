@@ -1,8 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Threading.Tasks;
 using Appointment.Shared.Model;
 using AutoMapper;
 using BlazorServerAppointmentApp.Areas.Identity;
@@ -13,12 +9,9 @@ using BlazorServerAppointmentApp.Model.Email;
 using BlazorServerAppointmentApp.Model.Validation;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -48,6 +41,8 @@ namespace BlazorServerAppointmentApp
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddHttpContextAccessor();
+
+            services.AddScoped<IUserService, UserService>();
             
             services.AddRazorPages();
             services.AddServerSideBlazor();
@@ -59,23 +54,6 @@ namespace BlazorServerAppointmentApp
             
             services.Configure<EmailSettings>(Configuration.GetSection("EmailSettings"));
             services.AddSingleton<IEmailSender, EmailSender>();
-
-            // Server Side Blazor doesn't register HttpClient by default
-            // if (services.All(x => x.ServiceType != typeof(HttpClient)))
-            // {
-            //     // Setup HttpClient for server side in a client side compatible fashion
-            //     services.AddScoped(s =>
-            //     {
-            //         // Creating the URI helper needs to wait until the JS Runtime is initialized, so defer it.
-            //         var uriHelper = s.GetRequiredService<NavigationManager>();
-            //         var handler = new HttpClientHandler();
-            //
-            //         return new HttpClient(handler)
-            //         {
-            //             BaseAddress = new Uri(uriHelper.BaseUri)
-            //         };
-            //     });
-            // }
             services.AddScoped<HttpClient>();
             
             //Fluent Validator

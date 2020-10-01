@@ -1,6 +1,5 @@
 using System;
 using System.Threading.Tasks;
-using BlazorServerAppointmentApp.Model;
 using BlazorServerAppointmentApp.Model.Email;
 using MailKit.Net.Smtp;
 using Microsoft.AspNetCore.Hosting;
@@ -11,7 +10,7 @@ using MimeKit;
 
 namespace BlazorServerAppointmentApp.Data
 {
-    public class EmailSender: IEmailSender
+    public class EmailSender : IEmailSender
     {
         private readonly EmailSettings _emailSettings;
         private readonly IWebHostEnvironment _env;
@@ -23,6 +22,7 @@ namespace BlazorServerAppointmentApp.Data
             _emailSettings = emailSettings.Value;
             _env = env;
         }
+
         public async Task SendEmailAsync(string email, string subject, string message)
         {
             try
@@ -63,7 +63,6 @@ namespace BlazorServerAppointmentApp.Data
 
                     await client.DisconnectAsync(true);
                 }
-
             }
             catch (Exception ex)
             {

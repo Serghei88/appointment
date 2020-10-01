@@ -3,7 +3,7 @@ using BlazorServerAppointmentApp.Data.Interfaces;
 
 namespace BlazorServerAppointmentApp.Data
 {
-    public class RandomPasswordGenerator: IPasswordGenerator
+    public class RandomPasswordGenerator : IPasswordGenerator
     {
         const string LOWER_CASE = "abcdefghijklmnopqursuvwxyz";
         const string UPPER_CAES = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -11,8 +11,9 @@ namespace BlazorServerAppointmentApp.Data
         const string SPECIALS = @"!@£$%^&*()#€";
 
 
-        public string GeneratePassword(bool useLowercase, bool useUppercase, bool useNumbers, bool useSpecial,
-            int passwordSize)
+        public string GeneratePassword(bool useLowercase = true, bool useUppercase = true, bool useNumbers = true,
+            bool useSpecial = true,
+            int passwordSize = 20)
         {
             char[] _password = new char[passwordSize];
             string charSet = ""; // Initialise to blank
@@ -24,6 +25,7 @@ namespace BlazorServerAppointmentApp.Data
 
             if (useUppercase) charSet += UPPER_CAES;
 
+            if (useNumbers) charSet += NUMBERS;
             if (useNumbers) charSet += NUMBERS;
 
             if (useSpecial) charSet += SPECIALS;

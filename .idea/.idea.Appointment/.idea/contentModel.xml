@@ -168,8 +168,10 @@
           <e p="Interfaces" t="Include">
             <e p="IAppointmentService.cs" t="Include" />
             <e p="IPasswordGenerator.cs" t="Include" />
+            <e p="IUserService.cs" t="Include" />
           </e>
           <e p="RandomPasswordGenerator.cs" t="Include" />
+          <e p="UserService.cs" t="Include" />
         </e>
         <e p="Shared" t="Include">
           <e p="LoginDisplay.razor" t="Include" />
@@ -190,6 +192,7 @@
             </e>
           </e>
         </e>
+        <e p="readme.md" t="Include" />
         <e p="wwwroot" t="Include">
           <e p="css" t="Include">
             <e p="bootstrap" t="Include">
