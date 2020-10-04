@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using System.Linq;
+using Appointment.API;
 using Appointment.Shared.Model;
 
 namespace BlazorServerAppointmentApp.Data

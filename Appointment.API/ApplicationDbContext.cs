@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Appointment.Shared.Model;
+﻿using Appointment.Shared.Model;
 using Microsoft.EntityFrameworkCore;
 
-namespace BlazorServerAppointmentApp.Data
+namespace Appointment.API
 {
     public class ApplicationDbContext : DbContext
     {

@@ -2,7 +2,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Appointment.Shared.DTO;
 using AutoMapper;
-using BlazorServerAppointmentApp.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
