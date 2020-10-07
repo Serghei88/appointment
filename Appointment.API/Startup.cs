@@ -1,5 +1,5 @@
+using Appointment.API.Repositories;
 using AutoMapper;
-using BlazorServerAppointmentApp.Data;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +31,9 @@ namespace Appointment.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo(){ Title = "Appointment API", Version = "v1"});
             });
+
+            services.AddTransient<IAppointmentRepository, AppointmentRepository>();
+            services.AddTransient<IMedicalProcedureRepository, MedicalProcedureRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

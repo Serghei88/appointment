@@ -1,0 +1,140 @@
+@page "/appointments/create"
+
+@using Microsoft.AspNetCore.Identity
+@using Appointment.Shared.Model
+@using Appointment.Web.Data.Interfaces
+@using Appointment.Web.Model
+@using Appointment.Web.Model.ViewModels
+@inject HttpClient http
+@inject NavigationManager UriHelper
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject UserManager<ApplicationUser> UserManager
+@inject IAppointmentService AppointmentService
+@inject IUserService UserService
+
+<EditForm Model="@_appointmentViewModel" OnValidSubmit="@HandleValidSubmit">
+    <FluentValidator></FluentValidator>
+    @if (String.IsNullOrEmpty(_appointmentViewModel.User.Id))
+    {
+        <div class="form-group">
+            <label>First Name :</label>
+            <div>
+                <InputText @bind-Value="@_appointmentViewModel.User.FirstName" />
+                <ValidationMessage For="@(() => _appointmentViewModel.User.FirstName)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Last Name :</label>
+            <div>
+                <InputText @bind-Value="@_appointmentViewModel.User.LastName" />
+                <ValidationMessage For="@(() => _appointmentViewModel.User.LastName)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Phone :</label>
+            <div>
+                <InputText @bind-Value="@_appointmentViewModel.User.PhoneNumber" />
+                <ValidationMessage For="@(() => _appointmentViewModel.User.PhoneNumber)" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Email :</label>
+            <div>
+                <InputText @bind-Value="@_appointmentViewModel.User.Email" />
+                <ValidationMessage For="@(() => _appointmentViewModel.User.Email)" />
+            </div>
+        </div>        
+    }
+
+    <div class="form-group">
+        <label>Date and Time of the visit :</label>
+        <div>
+            <div>Time</div>
+            <RadzenDatePicker @bind-Value="_appointmentViewModel.Time" DateFormat="d" ShowTime="true"
+                               HoursStep="1" ShowSeconds="false"
+                               DateRender="@DateRender"
+                               Change="@(args => ChangeTime(args, "DatePicker", "dd/MM/yyyy"))" />
+            <ValidationMessage For="@(() => _appointmentViewModel.Time)" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label>Medical Procedure :</label>
+        <div>
+            <RadzenDropDownDataGrid TValue="long" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowFiltering="true" AllowClear="true" 
+                                    Data="@(_medicalProcedureViewModels.Select(c => new { Id = c.Id, Name = c.Name }).Distinct().AsQueryable())" 
+                                    TextProperty="Name" ValueProperty="Id" Style="margin-bottom: 20px" 
+                                    Change="@(args => Change(args, "DropDownDataGrid"))" />
+            <ValidationMessage For="@(() => _appointmentViewModel.MedicalProcedureId)" />
+            <ValidationMessage For="@(() => _appointmentViewModel)" />
+
+        </div>
+    </div>
+    <button type="submit" class="btn btn-success">
+        Save
+    </button>
+</EditForm>
+
+@code{
+    readonly AppointmentViewModel _appointmentViewModel = new AppointmentViewModel();
+    List<MedicalProcedureViewModel> _medicalProcedureViewModels = new List<MedicalProcedureViewModel>();
+    private CustomValidator customValidator = new CustomValidator();
+      
+    private async Task HandleValidSubmit()
+    {
+        var registrationRequired = String.IsNullOrEmpty(_appointmentViewModel.User.Id);
+        if (registrationRequired)
+        {
+            _appointmentViewModel.User.Id = await UserService.CreateUser(_appointmentViewModel.User);
+        }
+        await AppointmentService.CreateAppointment(_appointmentViewModel);
+
+        UriHelper.NavigateTo(registrationRequired ? $"Identity/Account/RegisterConfirmation?email={_appointmentViewModel.User.Email}&returnUrl=%2F" : $"/", true);
+    //https://localhost:5001/Identity/Account/RegisterConfirmation?email=hedin-dark@mail.ru&returnUrl=%2F
+    }
+
+    
+    void Change(object value, string name)
+    {
+        _appointmentViewModel.MedicalProcedureId = (long) value;
+        StateHasChanged();
+    }
+    
+    void ChangeTime(DateTime? value, string name, string format)
+    {
+        if (value.HasValue)
+        {
+            _appointmentViewModel.Time = value.Value;
+        }
+        StateHasChanged();
+    }
+    
+    void DateRender(DateRenderEventArgs args)
+    {
+        args.Disabled = args.Date < DateTime.Now;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            
+        var user = await UserManager.GetUserAsync(authState.User);
+
+        if (authState.User.Identity.IsAuthenticated && user != null)
+        {
+            _appointmentViewModel.User.Id = user.Id;
+            _appointmentViewModel.User.Email = user.Email;
+            _appointmentViewModel.User.FirstName = user.FirstName;
+            _appointmentViewModel.User.LastName = user.LastName;
+            _appointmentViewModel.User.PhoneNumber = user.PhoneNumber;
+        }
+        _medicalProcedureViewModels = await AppointmentService.GetMedicalProcedures();
+    }
+      
+          
+    [CascadingParameter]
+    StateProvider StateProvider { get; set; }
+
+    protected override void OnInitialized() => StateProvider.OnChange += StateHasChanged;
+    public void Dispose() => StateProvider.OnChange -= StateHasChanged;
+}

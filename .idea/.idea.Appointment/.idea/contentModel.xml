@@ -27,6 +27,14 @@
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
         </e>
+        <e p="Repositories" t="Include">
+          <e p="AppointmentRepository.cs" t="Include" />
+          <e p="IAppointmentRepository.cs" t="Include" />
+          <e p="IMedicalProcedureRepository.cs" t="Include" />
+          <e p="IRepository.cs" t="Include" />
+          <e p="MedicalProcedureRepository.cs" t="Include" />
+          <e p="Repository.cs" t="Include" />
+        </e>
         <e p="Startup.cs" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
@@ -66,9 +74,9 @@
           </e>
         </e>
       </e>
-      <e p="Appointment.sln" t="IncludeFlat" />
-      <e p="BlazorServerSecurityApp/BlazorServerAppointmentApp" t="IncludeRecursive">
+      <e p="Appointment.Web" t="IncludeRecursive">
         <e p="App.razor" t="Include" />
+        <e p="Appointment.Web.csproj" t="IncludeRecursive" />
         <e p="Areas" t="Include">
           <e p="Identity" t="Include">
             <e p="IdentityHostingStartup.cs" t="Include" />
@@ -96,7 +104,6 @@
             <e p="RevalidatingIdentityAuthenticationStateProvider.cs" t="Include" />
           </e>
         </e>
-        <e p="BlazorServerAppointmentApp.csproj" t="IncludeRecursive" />
         <e p="Data" t="Include">
           <e p="ApplicationDbContext.cs" t="Include" />
           <e p="DatabaseInitializer.cs" t="Include" />
@@ -130,10 +137,9 @@
           </e>
         </e>
         <e p="Pages" t="Include">
-          <e p="Appointment" t="Include">
+          <e p="Appointments" t="Include">
             <e p="Create.razor" t="Include" />
             <e p="FetchData.razor" t="Include" />
-            <e p="Form.razor" t="Include" />
           </e>
           <e p="Doctor" t="Include">
             <e p="Edit.razor" t="Include" />
@@ -187,8 +193,8 @@
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
-              <e p="BlazorServerAppointmentApp.AssemblyInfo.cs" t="Include" />
-              <e p="BlazorServerAppointmentApp.RazorAssemblyInfo.cs" t="Include" />
+              <e p="Appointment.Web.AssemblyInfo.cs" t="Include" />
+              <e p="Appointment.Web.RazorAssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
@@ -221,6 +227,7 @@
           <e p="favicon.ico" t="Include" />
         </e>
       </e>
+      <e p="Appointment.sln" t="IncludeFlat" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>

@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Threading.Tasks;
+using Appointment.API.Repositories;
 using Appointment.Shared.DTO;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -11,19 +12,23 @@ namespace Appointment.API.Controllers
     [ApiController]
     public class AppointmentsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly IAppointmentRepository _appointmentRepository;
+        private readonly IMedicalProcedureRepository _medicalProcedureRepository;
         private readonly IMapper _mapper;
 
-        public AppointmentsController(ApplicationDbContext dbContext, IMapper mapper)
+        public AppointmentsController(IAppointmentRepository appointmentRepository, 
+            IMedicalProcedureRepository medicalProcedureRepository, IMapper mapper)
         {
-            _context = dbContext;
+            _appointmentRepository = appointmentRepository;
+            _medicalProcedureRepository = medicalProcedureRepository;
             _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var appointments = await _context.Appointments.Include(x => x.MedicalProcedure).ToListAsync();
+            var appointments = await _appointmentRepository.GetAll()
+                .Include(x => x.MedicalProcedure).ToListAsync();
             return Ok(appointments);
         }
 
@@ -31,67 +36,41 @@ namespace Appointment.API.Controllers
         [Route("check")]
         public async Task<IActionResult> CheckAvailability(AppointmentDTO appointmentDto)
         {
-            if (appointmentDto.MedicalProcedure.Id == 0)
-            {
-                return Ok(false);
-            }
-
-            var appointments = await _context.Appointments
-                .Where(x => x.MedicalProcedure.Id == appointmentDto.MedicalProcedure.Id &&
-                            x.Time == appointmentDto.Time)
-                .CountAsync();
-            var doctorMedicalPrCount = await _context.DoctorMedicalProcedures
-                .Where(x => x.MedicalProcedureId == appointmentDto.MedicalProcedure.Id).CountAsync();
-
-            return Ok(appointments < doctorMedicalPrCount);
+            return Ok(await _appointmentRepository.CheckAvailability(appointmentDto.MedicalProcedure.Id,appointmentDto.Time));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            var appointment = await _context.Appointments.Include(x => x.MedicalProcedure)
-                .FirstOrDefaultAsync(a => a.Id == id);
-            return Ok(appointment);
+            return Ok(_appointmentRepository.Get(id));
         }
 
         [HttpGet("userappointments/{id}")]
         public async Task<IActionResult> GetUserAppointments(string id)
         {
-            var appointments = await _context.Appointments.Where(a => a.UserId == id)
-                .Include(x => x.MedicalProcedure).ToListAsync();
-            return Ok(appointments);
+            
+            return Ok(await _appointmentRepository.GetUserAppointments(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(AppointmentDTO appointmentDto)
         {
+            var medicalProcedure = await _medicalProcedureRepository.Get(appointmentDto.MedicalProcedure.Id);
             var appointment = new Shared.Model.Appointment()
             {
                 Time = appointmentDto.Time,
                 UserId = appointmentDto.UserId,
-                MedicalProcedure =
-                    _context.MedicalProcedures.FirstOrDefault(x => x.Id == appointmentDto.MedicalProcedure.Id)
+                MedicalProcedure = medicalProcedure
             };
-            _context.Add(appointment);
-            await _context.SaveChangesAsync();
+            await _appointmentRepository.UpdateAsync(appointment);
             return Ok(appointment.Id);
-        }
-
-        [HttpPut]
-        public async Task<IActionResult> Put(AppointmentDTO appointmentDto)
-        {
-            var appointment = _mapper.Map<Shared.Model.Appointment>(appointmentDto);
-            _context.Entry(appointment).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var appointment = new Shared.Model.Appointment() {Id = id};
-            _context.Remove(appointment);
-            await _context.SaveChangesAsync();
+            var appointment = await _appointmentRepository.Get(id);
+            await _appointmentRepository.DeleteAsync(appointment);
             return NoContent();
         }
     }

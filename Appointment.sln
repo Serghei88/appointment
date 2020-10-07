@@ -1,10 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorServerAppointmentApp", "BlazorServerSecurityApp\BlazorServerAppointmentApp\BlazorServerAppointmentApp.csproj", "{62BDE061-65EA-48EE-AB7E-874EB10E7800}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointment.Shared", "Appointment.Shared\Appointment.Shared.csproj", "{721D12C5-C201-4915-AC0A-0B8D4C81A5A8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointment.API", "Appointment.API\Appointment.API.csproj", "{B279EA71-F35D-4F9F-B3E3-0FB0FE15D45F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Appointment.Web", "Appointment.Web\Appointment.Web.csproj", "{C907C07D-9F80-434A-9C01-FFE9554D3A63}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -12,10 +12,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{62BDE061-65EA-48EE-AB7E-874EB10E7800}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{62BDE061-65EA-48EE-AB7E-874EB10E7800}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{62BDE061-65EA-48EE-AB7E-874EB10E7800}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{62BDE061-65EA-48EE-AB7E-874EB10E7800}.Release|Any CPU.Build.0 = Release|Any CPU
 		{721D12C5-C201-4915-AC0A-0B8D4C81A5A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{721D12C5-C201-4915-AC0A-0B8D4C81A5A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{721D12C5-C201-4915-AC0A-0B8D4C81A5A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -24,5 +20,9 @@ Global
 		{B279EA71-F35D-4F9F-B3E3-0FB0FE15D45F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B279EA71-F35D-4F9F-B3E3-0FB0FE15D45F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B279EA71-F35D-4F9F-B3E3-0FB0FE15D45F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C907C07D-9F80-434A-9C01-FFE9554D3A63}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C907C07D-9F80-434A-9C01-FFE9554D3A63}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C907C07D-9F80-434A-9C01-FFE9554D3A63}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C907C07D-9F80-434A-9C01-FFE9554D3A63}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

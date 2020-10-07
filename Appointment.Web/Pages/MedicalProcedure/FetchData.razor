@@ -1,0 +1,67 @@
+@attribute [Authorize(Roles = "Administrator")]
+@page "/medicalprocedures"
+@using global::Appointment.Web.Model
+@using global::Appointment.Web.Data.Interfaces
+@using Appointment.Web.Model.ViewModels
+@inject NavigationManager UriHelper
+@inject DialogService dialogService
+<h3>Medical Procedures</h3>
+@inject IAppointmentService AppointmentService
+
+<RadzenButton Text=@($"Add new Medical Procedure") ButtonStyle="ButtonStyle.Primary" 
+              Click="@(x=> UriHelper.NavigateTo($"medicalprocedures/add"))" />
+
+
+<RadzenGrid AllowFiltering="true" FilterCaseSensitivity="FilterCaseSensitivity.CaseInsensitive" AllowPaging="true" PageSize="4"
+                AllowSorting="true" Data="@MedicalProcedures" TItem="MedicalProcedureViewModel" ColumnWidth="200px">
+        <Columns>
+            <RadzenGridColumn TItem="MedicalProcedureViewModel" Property="Id" Title="Doctor ID" />
+            <RadzenGridColumn TItem="MedicalProcedureViewModel" Property="Name" Title="Name" />
+            <RadzenGridColumn TItem="MedicalProcedureViewModel" Property="Description" Title="Description" />
+            <RadzenGridColumn TItem="MedicalProcedureViewModel" Property="Edit" Title="Edit" Sortable="false" Filterable="false">
+                <Template Context="data">
+                    <RadzenButton Text=@($"Edit") ButtonStyle="ButtonStyle.Secondary" 
+                                  Click="@(x=> UriHelper.NavigateTo($"medicalprocedures/edit/{data.Id}"))" />
+                    <RadzenButton Text=@($"Delete") ButtonStyle="ButtonStyle.Danger" 
+                                                      Click="@(x=> ShowDeleteProcedureDialog(data))" />
+                </Template>
+            </RadzenGridColumn>
+        </Columns>
+    </RadzenGrid>
+
+@code {
+    async Task ShowDeleteProcedureDialog(MedicalProcedureViewModel procedure) => await dialogService.OpenAsync("Delete Medical procedure", ds =>
+        @<RadzenCard Style="padding: 20px;">
+            <p Style="margin-bottom: 10px;">Confirm deleting @procedure.Name</p>
+            <p>
+                @procedure.Description
+            </p>
+            <div class="row">
+                <div class="col-md-12">
+                    <RadzenButton Text="Ok" Click="()=> DeleteProcedure(procedure.Id)" Style="margin-bottom: 10px; width: 150px" />
+                    <RadzenButton Text="Cancel" Click="()=> ds.Close(false)" ButtonStyle="ButtonStyle.Secondary"  Style="margin-bottom: 10px; width: 150px"/>
+                </div>
+            </div>
+        </RadzenCard>);
+    
+    private async Task DeleteProcedure(long procedureId)
+    {
+        await AppointmentService.DeleteDoctor(procedureId);
+        MedicalProcedures = await AppointmentService.GetMedicalProcedures();
+        StateHasChanged();
+        dialogService.Close();
+    }
+    
+    List<MedicalProcedureViewModel> MedicalProcedures { get; set; } = new List<MedicalProcedureViewModel>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        MedicalProcedures = await AppointmentService.GetMedicalProcedures();
+    }
+    
+    [CascadingParameter]
+    StateProvider StateProvider { get; set; }
+
+    protected override void OnInitialized() => StateProvider.OnChange += StateHasChanged;
+    public void Dispose() => StateProvider.OnChange -= StateHasChanged;
+}
