@@ -35,7 +35,6 @@ namespace Appointment.API.Repositories
             try
             {
                 await _context.AddAsync(entity);
-                await _context.SaveChangesAsync();
 
                 return entity;
             }
@@ -55,7 +54,6 @@ namespace Appointment.API.Repositories
             try
             {
                 _context.Update(entity);
-                await _context.SaveChangesAsync();
 
                 return entity;
             }
@@ -64,18 +62,17 @@ namespace Appointment.API.Repositories
                 throw new Exception($"{nameof(entity)} could not be updated");
             }
         }
-        
+
         public async Task<TEntity> DeleteAsync(TEntity entity)
         {
             if (entity == null)
             {
                 throw new ArgumentNullException($"{nameof(AddAsync)} entity must not be null");
             }
-            
+
             try
             {
                 _context.Remove(entity);
-                await _context.SaveChangesAsync();
                 return entity;
             }
             catch (Exception)

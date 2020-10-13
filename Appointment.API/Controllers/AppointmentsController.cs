@@ -12,22 +12,19 @@ namespace Appointment.API.Controllers
     [ApiController]
     public class AppointmentsController : Controller
     {
-        private readonly IAppointmentRepository _appointmentRepository;
-        private readonly IMedicalProcedureRepository _medicalProcedureRepository;
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
 
-        public AppointmentsController(IAppointmentRepository appointmentRepository, 
-            IMedicalProcedureRepository medicalProcedureRepository, IMapper mapper)
+        public AppointmentsController(IUnitOfWork unitOfWork, IMapper mapper)
         {
-            _appointmentRepository = appointmentRepository;
-            _medicalProcedureRepository = medicalProcedureRepository;
+            _unitOfWork = unitOfWork;
             _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var appointments = await _appointmentRepository.GetAll()
+            var appointments = await _unitOfWork.AppointmentRepository.GetAll()
                 .Include(x => x.MedicalProcedure).ToListAsync();
             return Ok(appointments);
         }
@@ -36,41 +33,43 @@ namespace Appointment.API.Controllers
         [Route("check")]
         public async Task<IActionResult> CheckAvailability(AppointmentDTO appointmentDto)
         {
-            return Ok(await _appointmentRepository.CheckAvailability(appointmentDto.MedicalProcedure.Id,appointmentDto.Time));
+            return Ok(await _unitOfWork.AppointmentRepository.CheckAvailability(appointmentDto.MedicalProcedure.Id,appointmentDto.Time));
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
-            return Ok(_appointmentRepository.Get(id));
+            return Ok(_unitOfWork.AppointmentRepository.Get(id));
         }
 
         [HttpGet("userappointments/{id}")]
         public async Task<IActionResult> GetUserAppointments(string id)
         {
             
-            return Ok(await _appointmentRepository.GetUserAppointments(id));
+            return Ok(await _unitOfWork.AppointmentRepository.GetUserAppointments(id));
         }
 
         [HttpPost]
         public async Task<IActionResult> Post(AppointmentDTO appointmentDto)
         {
-            var medicalProcedure = await _medicalProcedureRepository.Get(appointmentDto.MedicalProcedure.Id);
+            var medicalProcedure = await _unitOfWork.MedicalProcedureRepository.Get(appointmentDto.MedicalProcedure.Id);
             var appointment = new Shared.Model.Appointment()
             {
                 Time = appointmentDto.Time,
                 UserId = appointmentDto.UserId,
                 MedicalProcedure = medicalProcedure
             };
-            await _appointmentRepository.UpdateAsync(appointment);
+            await _unitOfWork.AppointmentRepository.UpdateAsync(appointment);
+            _unitOfWork.Complete();
             return Ok(appointment.Id);
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var appointment = await _appointmentRepository.Get(id);
-            await _appointmentRepository.DeleteAsync(appointment);
+            var appointment = await _unitOfWork.AppointmentRepository.Get(id);
+            await _unitOfWork.AppointmentRepository.DeleteAsync(appointment);
+            _unitOfWork.Complete();
             return NoContent();
         }
     }

@@ -32,8 +32,10 @@
           <e p="IAppointmentRepository.cs" t="Include" />
           <e p="IMedicalProcedureRepository.cs" t="Include" />
           <e p="IRepository.cs" t="Include" />
+          <e p="IUnitOfWork.cs" t="Include" />
           <e p="MedicalProcedureRepository.cs" t="Include" />
           <e p="Repository.cs" t="Include" />
+          <e p="UnitOfWork.cs" t="Include" />
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
