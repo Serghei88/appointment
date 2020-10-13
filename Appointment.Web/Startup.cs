@@ -8,6 +8,7 @@ using Appointment.Web.Model;
 using Appointment.Web.Model.Email;
 using Appointment.Web.Model.Validation;
 using Appointment.Web.Model.ViewModels;
+using Appointment.Web.Worker;
 using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Builder;
@@ -50,7 +51,7 @@ namespace Appointment.Web
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<ApplicationUser>>();
             services.AddSingleton<WeatherForecastService>();
-            services.AddScoped(s => new AppSettingsModel(Configuration.GetSection("AppSettings")));
+            services.AddSingleton(s => new AppSettingsModel(Configuration.GetSection("AppSettings")));
             services.AddScoped<IPasswordGenerator, RandomPasswordGenerator>();
 
             services.AddHttpClient<IAppointmentService, AppointmentService>(c =>
@@ -62,6 +63,8 @@ namespace Appointment.Web
             services.AddSingleton<IEmailSender, EmailSender>();
             services.AddScoped<HttpClient>();
             
+            services.AddHostedService<NotificationWorker>();
+
             //Fluent Validator
             // services.AddTransient<IValidator<AppointmentViewModel>, AppointmentViewModelValidator>();
             services.AddTransient<IValidator<AppointmentViewModel>>(x => new AppointmentViewModelValidator(x.GetRequiredService<IAppointmentService>()));

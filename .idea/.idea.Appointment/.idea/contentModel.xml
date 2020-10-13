@@ -118,6 +118,9 @@
           <e p="WeatherForecast.cs" t="Include" />
           <e p="WeatherForecastService.cs" t="Include" />
         </e>
+        <e p="Extensions" t="Include">
+          <e p="HttpClientExtensions.cs" t="Include" />
+        </e>
         <e p="Model" t="Include">
           <e p="AppSettingsModel.cs" t="Include" />
           <e p="CustomValidator.cs" t="Include" />
@@ -186,6 +189,9 @@
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="StateProvider.razor" t="Include" />
+        <e p="Worker" t="Include">
+          <e p="NotificationWorker.cs" t="Include" />
+        </e>
         <e p="_Imports.razor" t="Include" />
         <e p="appsettings.Development.json" t="Include" />
         <e p="appsettings.json" t="Include" />
